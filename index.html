@@ -11,15 +11,91 @@ body { font-family: 'Lato', sans-serif; background: linear-gradient(135deg, #f8f
 .header {
   background: linear-gradient(135deg, #1a3a52, #2c5aa0);
   color: white;
-  padding: 40px 32px;
+  padding: 40px 32px 32px;
   text-align: center;
 }
 .header-logo { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px; }
 .header h1 { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 8px; }
 .header p { font-size: 14px; opacity: 0.8; }
+.header-stats {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-top: 16px;
+}
 .container { max-width: 800px; margin: 24px auto; padding: 0 16px; }
+.search-box {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box:focus { border-color: #2c5aa0; }
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: inherit;
+  border-left: 5px solid #2c5aa0;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.card-latest {
+  border-left-color: #1a3a52;
+  background: linear-gradient(135deg, #f0f7ff, #fff);
+}
+.card-left { flex: 1; }
+.card-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a3a52;
+}
+.card-desc { font-size: 13px; color: #7f8c8d; margin-top: 4px; }
+.badge-new {
+  display: inline-block;
+  background: #1a3a52;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.5px;
+}
 .empty { text-align: center; color: #7f8c8d; padding: 40px; font-size: 14px; }
-.footer { text-align: center; font-size: 11px; color: #7f8c8d; padding: 24px; }
+.pagination { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+.page-btn {
+  padding: 8px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Lato', sans-serif;
+  transition: all 0.2s;
+}
+.page-btn:hover { border-color: #2c5aa0; color: #2c5aa0; }
+.page-btn.active { background: #2c5aa0; color: white; border-color: #2c5aa0; }
+.footer { text-align: center; font-size: 11px; color: #7f8c8d; padding: 24px; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -27,10 +103,72 @@ body { font-family: 'Lato', sans-serif; background: linear-gradient(135deg, #f8f
   <div class="header-logo">Badan Perencanaan Pembangunan Nasional</div>
   <h1>Daily Brief Dashboard</h1>
   <p>Isu Program Makan Bergizi Gratis</p>
+  <div class="header-stats">1 dashboard tersedia</div>
 </div>
 <div class="container">
-  <div class="empty">Belum ada dashboard. Dashboard akan muncul otomatis setelah workflow berjalan.</div>
+  <input type="text" class="search-box" id="searchBox" placeholder="Cari berdasarkan tanggal...">
+  <div id="cards"></div>
+  <div class="pagination" id="pagination"></div>
 </div>
 <div class="footer">Daily Brief — Bappenas</div>
+<script>
+const allCards = [{"date":"2026-04-23","filename":"Daily_Brief_2026-04-23.html","display":"Kamis, 23 April 2026"}];
+const perPage = 10;
+let currentPage = 1;
+let filtered = [...allCards];
+
+function renderCards() {
+  const container = document.getElementById("cards");
+  const start = (currentPage - 1) * perPage;
+  const pageItems = filtered.slice(start, start + perPage);
+
+  if (pageItems.length === 0) {
+    container.innerHTML = '<div class="empty">Tidak ada dashboard ditemukan.</div>';
+  } else {
+    container.innerHTML = pageItems.map(function(d, idx) {
+      const isLatest = start + idx === 0 && currentPage === 1 && filtered.length === allCards.length;
+      return '<a href="dashboards/' + d.filename + '" class="card ' + (isLatest ? 'card-latest' : '') + '">' +
+        '<div class="card-left">' +
+          (isLatest ? '<span class="badge-new">TERBARU</span>' : '') +
+          '<div class="card-date">' + d.display + '</div>' +
+          '<div class="card-desc">Daily Brief Isu Program Makan Bergizi Gratis</div>' +
+        '</div>' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2c5aa0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>' +
+      '</a>';
+    }).join("");
+  }
+  renderPagination();
+}
+
+function renderPagination() {
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const container = document.getElementById("pagination");
+  if (totalPages <= 1) { container.innerHTML = ""; return; }
+  let html = "";
+  if (currentPage > 1) html += '<button class="page-btn" onclick="goToPage(' + (currentPage - 1) + ')">Prev</button>';
+  for (let i = 1; i <= totalPages; i++) {
+    html += '<button class="page-btn ' + (i === currentPage ? 'active' : '') + '" onclick="goToPage(' + i + ')">' + i + '</button>';
+  }
+  if (currentPage < totalPages) html += '<button class="page-btn" onclick="goToPage(' + (currentPage + 1) + ')">Next</button>';
+  container.innerHTML = html;
+}
+
+function goToPage(page) {
+  currentPage = page;
+  renderCards();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("searchBox").addEventListener("input", function(e) {
+  const query = e.target.value.toLowerCase();
+  filtered = allCards.filter(function(d) {
+    return d.display.toLowerCase().includes(query) || d.date.includes(query);
+  });
+  currentPage = 1;
+  renderCards();
+});
+
+renderCards();
+</script>
 </body>
 </html>
