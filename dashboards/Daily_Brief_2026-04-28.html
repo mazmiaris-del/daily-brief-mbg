@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Brief — Selasa, 28 April 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700;8..60,800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+:root {
+  --paper:    #faf8f3;
+  --surface:  #ffffff;
+  --ink:      #1a1a1a;
+  --ink-mid:  #4a4a4a;
+  --ink-mute: #8a8a8a;
+  --rule:     #d4d4d4;
+  --rule-soft:#ebe9e3;
+  --navy:     #0a2540;
+  --navy-2:   #2c5aa0;
+  --navy-3:   #7f9fc4;
+  --amber:    #c87f00;
+  --salmon:   #fff1e5;
+  --red:      #a31621;
+  --green:    #2d6a4f;
+  --yellow:   #d29922;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:'Inter', -apple-system, sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"tnum","liga";
+  overflow-x:hidden;
+}
+.serif { font-family:'Source Serif 4', Georgia, serif; }
+
+/* ── LOADING SCREEN ──────────────────────────────── */
+#loader {
+  position:fixed; inset:0; z-index:10000;
+  background:var(--paper);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:opacity .55s ease, visibility .55s ease;
+}
+#loader.done { opacity:0; visibility:hidden; pointer-events:none; }
+.ld-eyebrow {
+  font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--ink-mute); margin-bottom:14px;
+}
+.ld-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:42px; font-weight:700; color:var(--ink);
+  letter-spacing:-1px; line-height:1; margin-bottom:8px;
+}
+.ld-sub {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:18px; font-style:italic; color:var(--ink-mid);
+  margin-bottom:32px;
+}
+.ld-bar-track {
+  width:240px; height:2px; background:var(--rule-soft);
+  position:relative; margin-bottom:14px;
+}
+.ld-bar-fill {
+  position:absolute; top:0; left:0; height:100%;
+  background:var(--ink); width:0%;
+  transition:width .45s cubic-bezier(.4,0,.2,1);
+}
+.ld-step {
+  font-size:11px; letter-spacing:1px; text-transform:uppercase;
+  color:var(--ink-mute);
+}
+
+/* ── FADE-IN ON SCROLL ───────────────────────────── */
+.fade-in { opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity:1; transform:none; }
+.fade-in.delay-1 { transition-delay:.06s; }
+.fade-in.delay-2 { transition-delay:.12s; }
+.fade-in.delay-3 { transition-delay:.18s; }
+.fade-in.delay-4 { transition-delay:.24s; }
+
+/* ── LAYOUT ──────────────────────────────────────── */
+.wrap { max-width:1080px; width:100%; margin:0 auto; padding:0 32px 80px; }
+
+/* ── MASTHEAD ────────────────────────────────────── */
+.masthead {
+  padding:36px 0 24px;
+  border-bottom:2px solid var(--ink);
+  background:var(--paper);
+  transition:padding .3s ease;
+}
+.masthead.scrolled { padding:14px 0 12px; }
+.masthead-row {
+  display:flex; justify-content:space-between; align-items:flex-end; gap:32px;
+}
+.masthead-kicker {
+  font-size:10px; font-weight:600; letter-spacing:2.5px;
+  color:var(--ink-mute); text-transform:uppercase;
+  margin-bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.masthead-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:52px; font-weight:700; color:var(--ink);
+  letter-spacing:-1.5px; line-height:1; margin-bottom:10px;
+}
+.masthead-sub {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:21px; font-style:italic; color:var(--ink-mid);
+  font-weight:400; margin-bottom:18px; letter-spacing:-0.2px;
+}
+.masthead-meta {
+  font-size:12.5px; color:var(--ink-mid);
+  display:flex; gap:14px; align-items:center;
+  padding-top:14px; border-top:1px solid var(--rule);
+  letter-spacing:0.2px;
+}
+.masthead-meta strong { color:var(--ink); font-weight:600; }
+.masthead-meta .sep { color:var(--rule); }
+.masthead-logos { display:flex; gap:14px; align-items:center; flex-shrink:0; padding-bottom:18px; }
+.masthead-logos img { height:48px; width:auto; object-fit:contain; opacity:.85; }
+.masthead.scrolled .masthead-title { font-size:24px; }
+.masthead.scrolled .masthead-sub { display:none; }
+.masthead.scrolled .masthead-logos img { height:32px; }
+
+/* ── LEAD CALLOUT ────────────────────────────────── */
+.lead {
+  background:var(--salmon);
+  padding:22px 28px;
+  margin:24px 0 8px;
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:17px; line-height:1.6;
+  color:var(--ink); font-style:italic;
+  border-left:3px solid var(--amber);
+}
+.lead strong { font-style:normal; font-weight:700; }
+.lead em { font-style:italic; }
+
+/* ── TOC ─────────────────────────────────────────── */
+.toc {
+  margin:28px 0 0;
+  padding:18px 0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  font-size:12px; letter-spacing:0.5px;
+  display:flex; flex-wrap:wrap; gap:8px 24px;
+  color:var(--ink-mute); align-items:baseline;
+}
+.toc-label {
+  font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  color:var(--ink); margin-right:8px;
+}
+.toc a {
+  color:var(--ink-mid); text-decoration:none;
+  border-bottom:1px solid transparent; padding:2px 0;
+  transition:color .2s, border-color .2s;
+}
+.toc a:hover { color:var(--ink); border-bottom-color:var(--ink); }
+
+/* ── SECTION ─────────────────────────────────────── */
+.section { margin-top:56px; scroll-margin-top:80px; }
+.section-title {
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:24px; padding-bottom:12px;
+  border-bottom:1px solid var(--rule);
+}
+.section-title h2 {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:30px; font-weight:700; color:var(--ink);
+  letter-spacing:-0.6px; line-height:1.1;
+}
+.section-title .en {
+  font-size:11px; font-weight:500; letter-spacing:2px;
+  text-transform:uppercase; color:var(--ink-mute);
+}
+
+/* ── KPI ASYMMETRIC GRID ─────────────────────────── */
+.kpi-grid {
+  display:grid;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.kpi-grid.cols-4 { grid-template-columns:1.7fr 1fr 1fr 1fr; }
+.kpi-grid.cols-3 { grid-template-columns:1.5fr 1fr 1fr; }
+.kpi-grid.cols-2 { grid-template-columns:1fr 1fr; }
+.kpi-grid.cols-1 { grid-template-columns:1fr; }
+.kpi {
+  padding:26px 26px 24px 0;
+  border-right:1px solid var(--rule-soft);
+  display:flex; flex-direction:column;
+}
+.kpi:last-child { border-right:0; padding-right:0; }
+.kpi:not(:first-child) { padding-left:26px; }
+.kpi-hero { padding:30px 36px 28px 0; }
+.kpi-label {
+  font-size:10px; font-weight:600; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--ink-mute); margin-bottom:14px;
+}
+.kpi-value {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-weight:700; color:var(--ink);
+  line-height:1; letter-spacing:-1.5px;
+  font-feature-settings:"tnum";
+}
+.kpi-hero .kpi-value { font-size:64px; }
+.kpi:not(.kpi-hero) .kpi-value { font-size:36px; letter-spacing:-1px; }
+.kpi-unit {
+  font-size:12.5px; color:var(--ink-mute);
+  margin-top:6px; line-height:1.4;
+}
+.kpi-context {
+  font-size:13px; color:var(--ink-mid); line-height:1.55;
+  margin-top:auto; padding-top:14px; border-top:1px dashed var(--rule);
+}
+.kpi-context a {
+  color:var(--ink); text-decoration:underline;
+  text-decoration-color:var(--rule); text-underline-offset:3px;
+}
+.kpi-context a:hover { text-decoration-color:var(--ink); }
+
+/* ── CHART ROW ───────────────────────────────────── */
+.charts-row { display:grid; grid-template-columns:0.95fr 1.05fr; gap:48px; margin-top:8px; }
+.charts-row.eq { grid-template-columns:1fr 1fr; gap:36px; }
+.chart-block h3 {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:18px; font-weight:600; color:var(--ink);
+  margin-bottom:6px; letter-spacing:-0.2px;
+}
+.chart-deck {
+  font-size:13.5px; color:var(--ink-mid);
+  margin-bottom:18px; font-style:italic; line-height:1.55;
+}
+.chart-canvas-wrap { position:relative; height:240px; }
+.chart-source {
+  font-size:10.5px; color:var(--ink-mute); margin-top:14px;
+  padding-top:10px; border-top:1px solid var(--rule-soft);
+  letter-spacing:0.5px; text-transform:uppercase;
+}
+
+/* ── DATA TABLE LEGEND ───────────────────────────── */
+.data-list { font-feature-settings:"tnum"; margin-top:18px; }
+.data-row {
+  display:grid; grid-template-columns:14px 1fr auto auto;
+  gap:14px; align-items:center; padding:9px 0;
+  border-bottom:1px solid var(--rule-soft); font-size:13px;
+}
+.data-row:last-child { border-bottom:0; }
+.data-bullet { width:10px; height:10px; }
+.data-name { color:var(--ink); font-weight:500; }
+.data-pct  { color:var(--ink-mute); font-size:12px; }
+.data-val  { color:var(--ink); font-weight:600; min-width:54px; text-align:right; }
+
+/* ── INSIGHT (SUMMARY NEWS) ──────────────────────── */
+.insight-list { margin-top:8px; }
+.insight {
+  display:grid; grid-template-columns:36px 1fr; gap:18px;
+  padding:18px 0; border-bottom:1px solid var(--rule);
+}
+.insight:last-child { border-bottom:0; }
+.insight-num {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:24px; font-weight:600; color:var(--ink-mute);
+  font-feature-settings:"tnum"; line-height:1;
+}
+.insight-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:17px; font-weight:600; color:var(--ink);
+  margin-bottom:6px; line-height:1.35; letter-spacing:-0.2px;
+}
+.insight-body { font-size:14px; line-height:1.65; color:var(--ink-mid); }
+
+/* ── TOKOH ───────────────────────────────────────── */
+.tokoh-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--rule); }
+.tokoh {
+  display:grid; grid-template-columns:48px 1fr; gap:16px;
+  padding:20px 24px 20px 0; border-bottom:1px solid var(--rule-soft);
+}
+.tokoh:nth-child(odd)  { border-right:1px solid var(--rule-soft); padding-right:24px; }
+.tokoh:nth-child(even) { padding-left:24px; padding-right:0; }
+.tokoh-av {
+  width:48px; height:48px; border-radius:50%;
+  background:var(--rule-soft); border:1px solid var(--rule);
+  color:var(--ink); font-size:14px; font-weight:600;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Source Serif 4', Georgia, serif;
+  flex-shrink:0; overflow:hidden;
+}
+.tokoh-av img { width:100%; height:100%; object-fit:cover; }
+.tokoh-name {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:15px; font-weight:600; color:var(--ink);
+  letter-spacing:-0.1px;
+}
+.tokoh-jab { font-size:11.5px; color:var(--ink-mute); margin:3px 0 8px; line-height:1.4; }
+.tokoh-mention { font-size:11px; letter-spacing:0.5px; color:var(--ink-mute); font-feature-settings:"tnum"; }
+.tokoh-quote {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:13.5px; color:var(--ink-mid); font-style:italic;
+  line-height:1.6; margin-top:8px;
+  border-left:2px solid var(--rule); padding-left:12px;
+}
+
+/* ── SOSMED SOROTAN ──────────────────────────────── */
+.soc-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+.soc-block-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:16px; font-weight:600; color:var(--ink);
+  padding-bottom:10px; margin-bottom:14px;
+  border-bottom:2px solid var(--ink);
+  display:flex; justify-content:space-between; align-items:baseline;
+}
+.soc-block-title.pos { border-bottom-color:var(--green); }
+.soc-block-title.neg { border-bottom-color:var(--red); }
+.soc-block-title .count {
+  font-size:11px; letter-spacing:0.5px; color:var(--ink-mute);
+  font-family:'Inter', sans-serif; font-style:normal; font-weight:500;
+}
+.soc-item { padding:14px 0; border-bottom:1px solid var(--rule-soft); }
+.soc-item:last-child { border-bottom:0; }
+.soc-item-title {
+  font-size:14px; font-weight:600; color:var(--ink);
+  margin-bottom:5px; line-height:1.4;
+  display:flex; gap:10px; align-items:flex-start;
+}
+.soc-emosi {
+  font-size:9.5px; letter-spacing:1.2px; text-transform:uppercase;
+  padding:2px 7px; flex-shrink:0; font-weight:600;
+}
+.soc-emosi.green { background:#e6f4ea; color:var(--green); }
+.soc-emosi.red   { background:#fdecea; color:var(--red); }
+.soc-emosi.amber { background:#fff3e0; color:var(--amber); }
+.soc-detail { font-size:13px; line-height:1.55; color:var(--ink-mid); margin-bottom:8px; }
+.platbadge {
+  display:inline-block; font-size:10px; letter-spacing:0.8px;
+  text-transform:uppercase; padding:1px 7px; margin-right:5px;
+  color:var(--ink-mid); border:1px solid var(--rule);
+}
+
+/* ── REKOMENDASI ─────────────────────────────────── */
+.rek-list { margin-top:0; }
+.rek {
+  display:grid; grid-template-columns:48px 1fr auto; gap:20px;
+  padding:22px 0; border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.rek:last-child { border-bottom:0; }
+.rek-num {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:28px; font-weight:600; color:var(--ink-mute);
+  font-feature-settings:"tnum"; line-height:1;
+}
+.rek-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:18px; font-weight:600; color:var(--ink);
+  margin-bottom:6px; letter-spacing:-0.2px;
+}
+.rek-latar { font-size:13px; color:var(--ink-mute); font-style:italic; margin-bottom:10px; line-height:1.55; }
+.rek-body { font-size:14px; line-height:1.7; color:var(--ink-mid); }
+.rek-sasaran {
+  font-size:12px; color:var(--ink); font-weight:600;
+  margin-top:10px; padding-top:8px; border-top:1px dotted var(--rule);
+  letter-spacing:0.3px;
+}
+.rek-sasaran span { color:var(--ink-mute); font-weight:400; margin-right:4px; }
+.rek-prio {
+  font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase;
+  padding:3px 8px; font-weight:700; flex-shrink:0;
+  align-self:start; white-space:nowrap;
+}
+.rek-prio.tinggi { background:#fdecea; color:var(--red); border:1px solid var(--red); }
+.rek-prio.sedang { background:#fff3e0; color:var(--amber); border:1px solid var(--amber); }
+.rek-prio.rendah { background:#e6f4ea; color:var(--green); border:1px solid var(--green); }
+
+/* ── TOP PERSON SOCMED ──────────────────────────── */
+.tps-list { font-feature-settings:"tnum"; }
+.tps-item {
+  display:grid; grid-template-columns:24px 36px 1fr 110px; gap:14px;
+  align-items:center; padding:11px 0; border-bottom:1px solid var(--rule-soft);
+}
+.tps-item:last-child { border-bottom:0; }
+.tps-rank { font-size:11px; color:var(--ink-mute); text-align:center; font-weight:600; }
+.tps-av {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--rule-soft); border:1px solid var(--rule);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:12px; font-weight:600; color:var(--ink);
+  overflow:hidden;
+}
+.tps-av img { width:100%; height:100%; object-fit:cover; }
+.tps-name {
+  font-size:13.5px; font-weight:500; color:var(--ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.tps-bar-wrap { display:flex; flex-direction:column; gap:3px; }
+.tps-bar-bg { height:3px; background:var(--rule-soft); position:relative; }
+.tps-bar-fill {
+  position:absolute; top:0; left:0; height:100%;
+  background:var(--ink); transition:width .8s cubic-bezier(.4,0,.2,1);
+}
+.tps-val { font-size:11px; color:var(--ink); font-weight:600; text-align:right; letter-spacing:0.3px; }
+
+/* ── WORDCLOUD ───────────────────────────────────── */
+.wc { display:flex; flex-wrap:wrap; gap:6px 14px; padding:8px 0; line-height:2; }
+.wc span {
+  font-family:'Source Serif 4', Georgia, serif;
+  color:var(--ink); cursor:default;
+  transition:color .2s;
+}
+.wc span:hover { color:var(--amber); }
+
+/* ── EMPTY STATE ─────────────────────────────────── */
+.empty-state {
+  text-align:center; padding:32px 16px;
+  color:var(--ink-mute); font-size:13px; font-style:italic;
+  border:1px dashed var(--rule);
+}
+
+/* ── FOOTER ──────────────────────────────────────── */
+.footer {
+  margin-top:64px; padding:28px 0 12px;
+  border-top:2px solid var(--ink);
+  font-size:12px; color:var(--ink-mute); line-height:1.7;
+}
+.footer strong { color:var(--ink); font-weight:600; }
+.footer .disclaimer {
+  font-size:10px; letter-spacing:1px; text-transform:uppercase;
+  margin-top:10px; opacity:.7;
+}
+
+/* ── TIER TOOLTIP (simple) ───────────────────────── */
+.tier-tooltip {
+  position:fixed; pointer-events:none; z-index:9999;
+  background:var(--ink); color:#fff;
+  padding:14px 16px;
+  font-family:'Inter', sans-serif; font-size:11.5px;
+  min-width:240px; max-width:320px;
+  opacity:0; transform:translateY(4px);
+  transition:opacity .18s ease, transform .18s ease;
+  font-feature-settings:"tnum";
+}
+.tier-tooltip.active { opacity:1; transform:translateY(0); }
+.tier-tooltip-title {
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:14px; font-weight:600; margin-bottom:3px;
+  display:flex; align-items:center; gap:8px;
+}
+.tier-tooltip-dot { width:8px; height:8px; flex-shrink:0; }
+.tier-tooltip-sub {
+  font-size:10.5px; color:rgba(255,255,255,.55);
+  margin-bottom:10px; padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.15);
+  letter-spacing:0.3px;
+}
+.tier-tooltip-row {
+  display:grid; grid-template-columns:18px 1fr 60px 30px;
+  gap:8px; align-items:center; padding:3px 0;
+}
+.tier-tooltip-rank { font-size:10px; color:rgba(255,255,255,.4); text-align:right; }
+.tier-tooltip-name { font-size:11px; color:#e8eaed; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tier-tooltip-bar-bg { height:2px; background:rgba(255,255,255,.1); position:relative; }
+.tier-tooltip-bar-fill { position:absolute; top:0; left:0; height:100%; }
+.tier-tooltip-val { font-size:11px; font-weight:600; text-align:right; }
+.tier-tooltip-more { font-size:10px; color:rgba(255,255,255,.4); margin-top:6px; text-align:center; font-style:italic; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width:900px) {
+  .kpi-grid.cols-4, .kpi-grid.cols-3 { grid-template-columns:1fr 1fr; }
+  .kpi { border-right:0; border-bottom:1px solid var(--rule-soft); padding:20px 0 !important; }
+  .kpi:nth-child(odd)  { padding-right:20px !important; border-right:1px solid var(--rule-soft); }
+  .kpi:nth-child(even) { padding-left:20px !important; }
+  .charts-row, .charts-row.eq { grid-template-columns:1fr; gap:36px; }
+  .tokoh-grid, .soc-grid { grid-template-columns:1fr; }
+  .tokoh:nth-child(odd), .tokoh:nth-child(even) { border-right:0; padding:18px 0 !important; }
+  .masthead-row { flex-direction:column; align-items:flex-start; }
+  .masthead-logos { padding-bottom:0; }
+}
+@media (max-width:560px) {
+  .masthead-title { font-size:36px; }
+  .kpi-hero .kpi-value { font-size:48px; }
+  .kpi:not(.kpi-hero) .kpi-value { font-size:30px; }
+  .section-title h2 { font-size:24px; }
+  .wrap { padding-left:18px; padding-right:18px; }
+  .toc { gap:6px 16px; font-size:11.5px; }
+}
+
+/* ── PRINT ───────────────────────────────────────── */
+@media print {
+  #loader, .tier-tooltip { display:none !important; }
+  .masthead { position:static !important; }
+  .fade-in { opacity:1 !important; transform:none !important; }
+  body { background:#fff; }
+  .lead { background:#f5f0e8; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .section { page-break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOADING SCREEN ────────────────────────────── -->
+<div id="loader">
+  <div class="ld-eyebrow">Bappenas · Daily Brief</div>
+  <div class="ld-title">Memuat Laporan</div>
+  <div class="ld-sub">Selasa, 28 April 2026</div>
+  <div class="ld-bar-track"><div class="ld-bar-fill" id="ldrBar"></div></div>
+  <div class="ld-step" id="ldrStep">Menyiapkan data</div>
+</div>
+
+<div class="wrap">
+
+<!-- ── MASTHEAD ──────────────────────────────────── -->
+<header class="masthead" id="masthead">
+  <div class="masthead-kicker">
+    <span>Republik Indonesia · Bappenas</span>
+    <span>Pemantauan Isu Publik</span>
+  </div>
+  <div class="masthead-row">
+    <div>
+      <h1 class="masthead-title">Daily Brief</h1>
+      <p class="masthead-sub">Isu Program Makan Bergizi Gratis</p>
+    </div>
+    <div class="masthead-logos">
+      <img src="https://inklusi.or.id/wp-content/uploads/2024/04/Logo-Bappenas-Putih-ID.png" alt="Bappenas" style="filter:brightness(0)">
+      <img src="https://inspektorat.pasamanbaratkab.go.id/public/images/berakhlak.png" alt="BerAKHLAK" style="filter:brightness(0)">
+    </div>
+  </div>
+  <div class="masthead-meta">
+    <strong>Selasa, 28 April 2026</strong>
+    <span class="sep">·</span>
+    <span id="hdr-ima">—</span>
+    <span class="sep">·</span>
+    <span id="hdr-isa">—</span>
+  </div>
+</header>
+
+<!-- ── LEAD ──────────────────────────────────────── -->
+<div class="lead fade-in" id="lead"></div>
+
+<!-- ── DAFTAR ISI ────────────────────────────────── -->
+<nav class="toc fade-in">
+  <span class="toc-label">Isi</span>
+  <a href="#sec-scorecard">Angka Kunci</a>
+  <a href="#sec-berita">Pemberitaan</a>
+  <a href="#sec-tokoh">Tokoh Publik</a>
+  <a href="#sec-sosmed">Persepsi Publik</a>
+  <a href="#sec-sorotan">Sorotan Sosmed</a>
+  <a href="#sec-rekomendasi">Rekomendasi</a>
+</nav>
+
+<!-- ── SECTION 1 · ANGKA KUNCI ───────────────────── -->
+<section class="section" id="sec-scorecard">
+  <div class="section-title fade-in">
+    <h2>Angka Kunci</h2>
+    <span class="en">Highlight Numbers</span>
+  </div>
+  <div class="kpi-grid fade-in" id="scorecard"></div>
+</section>
+
+<!-- ── SECTION 2 · PEMBERITAAN ───────────────────── -->
+<section class="section" id="sec-berita">
+  <div class="section-title fade-in">
+    <h2>Pemberitaan Media Massa</h2>
+    <span class="en">Press Coverage</span>
+  </div>
+
+  <div class="charts-row fade-in">
+    <div class="chart-block">
+      <h3>Distribusi tier media</h3>
+      <p class="chart-deck">Komposisi pemberitaan berdasarkan tingkatan kredibilitas media yang memuat.</p>
+      <div class="chart-canvas-wrap" style="height:220px"><canvas id="cTier"></canvas></div>
+      <div class="data-list" id="tierLegend"></div>
+      <div class="chart-source">Sumber: Pemantauan media nasional, Selasa, 28 April 2026</div>
+    </div>
+    <div class="chart-block">
+      <h3>Top 10 organisasi yang disebut</h3>
+      <p class="chart-deck">Sepuluh institusi paling banyak disebut dalam pemberitaan 24 jam terakhir.</p>
+      <div class="chart-canvas-wrap" style="height:340px"><canvas id="cOrg"></canvas></div>
+      <div class="chart-source">Sumber: Pemantauan media nasional, Selasa, 28 April 2026</div>
+    </div>
+  </div>
+
+  <div class="chart-block fade-in" style="margin-top:36px">
+    <h3>Total pemberitaan 7 hari terakhir</h3>
+    <p class="chart-deck">Tren volume pemberitaan harian di seluruh media yang dipantau.</p>
+    <div class="chart-canvas-wrap" style="height:220px"><canvas id="cNewsTrend"></canvas></div>
+    <div class="chart-source">Sumber: Pemantauan media nasional</div>
+  </div>
+
+  <div class="chart-block fade-in" style="margin-top:36px">
+    <h3>Sorotan berita</h3>
+    <p class="chart-deck">Topik-topik utama yang menjadi pemberitaan dominan hari ini.</p>
+    <div class="insight-list" id="summary-news"></div>
+  </div>
+</section>
+
+<!-- ── SECTION 3 · TOKOH PUBLIK ──────────────────── -->
+<section class="section" id="sec-tokoh">
+  <div class="section-title fade-in">
+    <h2>Tokoh Publik</h2>
+    <span class="en">Public Figures</span>
+  </div>
+  <div class="tokoh-grid fade-in" id="tokoh"></div>
+</section>
+
+<!-- ── SECTION 4 · PERSEPSI PUBLIK ───────────────── -->
+<section class="section" id="sec-sosmed">
+  <div class="section-title fade-in">
+    <h2>Persepsi Publik — Sosial Media</h2>
+    <span class="en">Public Perception</span>
+  </div>
+
+  <div class="charts-row fade-in">
+    <div class="chart-block">
+      <h3>Sentimen publik</h3>
+      <p class="chart-deck">Distribusi sentimen di seluruh percakapan sosial media bertema MBG.</p>
+      <div class="chart-canvas-wrap" style="height:200px"><canvas id="cSent"></canvas></div>
+      <div class="data-list" id="sentLegend"></div>
+      <div class="chart-source">Sumber: Pemantauan sosial media</div>
+    </div>
+    <div class="chart-block">
+      <h3>Tokoh yang paling banyak disebut</h3>
+      <p class="chart-deck">Sepuluh tokoh paling sering dirujuk dalam percakapan publik.</p>
+      <div class="tps-list" id="top-person-socmed"></div>
+      <div class="chart-source" style="margin-top:14px">Sumber: Pemantauan sosial media</div>
+    </div>
+  </div>
+
+  <div class="charts-row eq fade-in" style="margin-top:36px">
+    <div class="chart-block">
+      <h3>Platform sosial media</h3>
+      <p class="chart-deck">Distribusi percakapan berdasarkan platform.</p>
+      <div class="chart-canvas-wrap" style="height:200px"><canvas id="cPlat"></canvas></div>
+      <div class="data-list" id="platLegend"></div>
+      <div class="chart-source">Sumber: Pemantauan sosial media</div>
+    </div>
+    <div class="chart-block">
+      <h3>Distribusi emosi</h3>
+      <p class="chart-deck">Nuansa emosi yang terdeteksi pada percakapan publik.</p>
+      <div class="chart-canvas-wrap" style="height:240px"><canvas id="cEmo"></canvas></div>
+      <div class="chart-source">Sumber: Pemantauan sosial media</div>
+    </div>
+  </div>
+
+  <div class="chart-block fade-in" style="margin-top:36px">
+    <h3>Frasa yang sering muncul</h3>
+    <p class="chart-deck">Kata dan frasa dominan pada percakapan publik 24 jam terakhir.</p>
+    <div class="wc" id="wordcloud"></div>
+  </div>
+</section>
+
+<!-- ── SECTION 5 · SOROTAN POSTINGAN ─────────────── -->
+<section class="section" id="sec-sorotan">
+  <div class="section-title fade-in">
+    <h2>Sorotan Postingan</h2>
+    <span class="en">Top Posts</span>
+  </div>
+  <div class="soc-grid fade-in" id="socmed-grid"></div>
+</section>
+
+<!-- ── SECTION 6 · REKOMENDASI ───────────────────── -->
+<section class="section" id="sec-rekomendasi">
+  <div class="section-title fade-in">
+    <h2>Rekomendasi Kebijakan</h2>
+    <span class="en">Policy Recommendations</span>
+  </div>
+  <div class="rek-list" id="rek"></div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer class="footer">
+  <strong>Daily Brief Isu Program Makan Bergizi Gratis</strong><br>
+  Disusun oleh Badan Perencanaan Pembangunan Nasional (Bappenas)<br>
+  Selasa, 28 April 2026
+  <div class="disclaimer">Dokumen Internal · Untuk Penggunaan Resmi</div>
+</footer>
+
+</div>
+
+<div class="tier-tooltip" id="tierTooltip"></div>
+
+<script>
+const scorecard         = [{"nilai":"171 T","satuan":"Triliun","label":"Anggaran MBG","konteks":"Program Makan Bergizi Gratis (MBG) menelan anggaran sebesar Rp 171 triliun pada tahun 2026.","link":"http://strateginews.id/2026/04/27/anggaran-melonjak-kpk-identifikasi-delapan-titik-rawan-korupsi-dalam-program-mbg"},{"nilai":"1,2 T","satuan":"Triliun","label":"Anggaran IT","konteks":"BGN menganggarkan Rp 1,2 triliun untuk pengembangan sistem absensi digital dan infrastruktur TI program MBG.","link":"http://lambeturah.co.id/proyek-it-mbg-rp-12-t-dituding-gaib-bos-bgn-untuk-sistem-absensi-digital-mbg"},{"nilai":"50 T","satuan":"Triliun","label":"Penghematan APBN","konteks":"Penghapusan penyaluran MBG pada hari Sabtu diproyeksikan menghemat anggaran negara hingga lebih dari Rp 50 triliun per tahun.","link":"http://radarpena.co.id/2026/04/27/hemat-rp50-triliun-setahun-dampak-penghapusan-mbg-di-hari-sabtu"},{"nilai":"815 T","satuan":"Triliun","label":"Belanja Negara","konteks":"Realisasi belanja negara triwulan I 2026 mencapai Rp 815 triliun, naik 31,4 % YoY.","link":"http://www.tvonenews.com/ekonomi/435551-belanja-negara-triwulan-i-2026-tembus-rp815-triliun"}];
+const mediaShare        = [{"nama":"cnbc indonesia","jumlah":21,"tier":"1"},{"nama":"kompas","jumlah":17,"tier":"1"},{"nama":"infoterkini.id","jumlah":17,"tier":"Tidak Diketahui"},{"nama":"muda news","jumlah":16,"tier":"3"},{"nama":"wartaalor.com","jumlah":13,"tier":"Tidak Diketahui"},{"nama":"asatunews.co.id","jumlah":12,"tier":"3"},{"nama":"stg.ntvnews.id","jumlah":9,"tier":"Tidak Diketahui"},{"nama":"flores.pikiran-rakyat.com","jumlah":8,"tier":"Tidak Diketahui"},{"nama":"kompas.id","jumlah":8,"tier":"1"},{"nama":"radarmedia.id","jumlah":7,"tier":"Tidak Diketahui"},{"nama":"koran jakarta","jumlah":7,"tier":"3"},{"nama":"pantau","jumlah":7,"tier":"3"},{"nama":"detik","jumlah":7,"tier":"1"},{"nama":"klive tv indonesia","jumlah":7,"tier":"3"},{"nama":"jakarta365.net","jumlah":6,"tier":"Tidak Diketahui"},{"nama":"investor daily","jumlah":6,"tier":"1"},{"nama":"harian terbit","jumlah":6,"tier":"3"},{"nama":"metro tv","jumlah":6,"tier":"1"},{"nama":"berita merdeka","jumlah":6,"tier":"3"},{"nama":"majalah tempo","jumlah":6,"tier":"Tidak Diketahui"},{"nama":"pikiran rakyat jabar","jumlah":6,"tier":"3"},{"nama":"money.kompas.com","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"liputan6 sragen","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"rm.id","jumlah":5,"tier":"1"},{"nama":"readers.id","jumlah":5,"tier":"3"},{"nama":"rrinews","jumlah":5,"tier":"1"},{"nama":"malanghits.pikiran-rakyat.com","jumlah":5,"tier":"3"},{"nama":"panennews.com","jumlah":5,"tier":"3"},{"nama":"ntvnews.id","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"memorandum.disway.id","jumlah":5,"tier":"3"},{"nama":"kontan","jumlah":5,"tier":"1"},{"nama":"idn times","jumlah":4,"tier":"1"},{"nama":"berita jatim","jumlah":4,"tier":"3"},{"nama":"republika","jumlah":4,"tier":"1"},{"nama":"republik merdeka","jumlah":4,"tier":"1"},{"nama":"tvonenews","jumlah":4,"tier":"3"},{"nama":"akurat.co","jumlah":4,"tier":"3"},{"nama":"tempo.co","jumlah":4,"tier":"1"},{"nama":"harianbasis.co","jumlah":4,"tier":"Tidak Diketahui"},{"nama":"detik jabar","jumlah":4,"tier":"2"},{"nama":"pantau.com","jumlah":4,"tier":"Tidak Diketahui"},{"nama":"kabarsenator.com","jumlah":4,"tier":"3"},{"nama":"meuligoe aceh","jumlah":3,"tier":"3"},{"nama":"liputan 6","jumlah":3,"tier":"1"},{"nama":"inilahkalsel.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"berita satu","jumlah":3,"tier":"1"},{"nama":"suaranusantara.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"poskota","jumlah":3,"tier":"3"},{"nama":"indo zone","jumlah":3,"tier":"1"},{"nama":"suara surabaya","jumlah":3,"tier":"3"},{"nama":"lambeturah.co.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"gledeknews.com","jumlah":3,"tier":"3"},{"nama":"betawipos.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"kanal indonesia","jumlah":3,"tier":"3"},{"nama":"bukurepublika.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"kompasiana","jumlah":3,"tier":"3"},{"nama":"beritasampit.com","jumlah":3,"tier":"3"},{"nama":"jawa pos","jumlah":3,"tier":"1"},{"nama":"kabar-priangan","jumlah":3,"tier":"3"},{"nama":"ruangharian.com","jumlah":3,"tier":"3"},{"nama":"kabarterbaru.info","jumlah":3,"tier":"3"},{"nama":"cnn indonesia","jumlah":3,"tier":"1"},{"nama":"malangposcomedia.id","jumlah":3,"tier":"3"},{"nama":"klikmaluku.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"harianbhirawa.co.id","jumlah":3,"tier":"3"},{"nama":"jurnas","jumlah":3,"tier":"3"},{"nama":"mediadinamikaglobal.id","jumlah":3,"tier":"3"},{"nama":"alonesia.com","jumlah":3,"tier":"3"},{"nama":"ibenews.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"valid news","jumlah":2,"tier":"3"},{"nama":"voi.id","jumlah":2,"tier":"3"},{"nama":"inews portal","jumlah":2,"tier":"1"},{"nama":"tangsel pos","jumlah":2,"tier":"3"},{"nama":"haloindonesia.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"balpos","jumlah":2,"tier":"3"},{"nama":"bitvonline.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"fajar","jumlah":2,"tier":"3"},{"nama":"tebaran.com","jumlah":2,"tier":"3"},{"nama":"infomalangraya.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"rakyatsulsel.fajar.co.id","jumlah":2,"tier":"3"},{"nama":"mediatujuh.com","jumlah":2,"tier":"3"},{"nama":"merdekanews","jumlah":2,"tier":"3"},{"nama":"media indonesia","jumlah":2,"tier":"1"},{"nama":"daulat.co","jumlah":2,"tier":"3"},{"nama":"mistar.id","jumlah":2,"tier":"3"},{"nama":"cakrakrisna.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"liranews.com","jumlah":2,"tier":"3"},{"nama":"laros.id","jumlah":2,"tier":"3"},{"nama":"bahtera jateng","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"radar depok","jumlah":2,"tier":"3"},{"nama":"depokraya.pikiran-rakyat.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"radar banten","jumlah":2,"tier":"3"},{"nama":"jateng.kilat.com","jumlah":2,"tier":"3"},{"nama":"katadata","jumlah":2,"tier":"3"},{"nama":"tribratanews polri","jumlah":2,"tier":"3"},{"nama":"cakrawala.co","jumlah":2,"tier":"3"},{"nama":"kilat.com","jumlah":2,"tier":"3"},{"nama":"neraca","jumlah":2,"tier":"3"},{"nama":"holopis.com","jumlah":2,"tier":"3"},{"nama":"cinews","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"indonesia satu","jumlah":2,"tier":"3"},{"nama":"kabarbaik.co","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"garuda.tv","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"surabaya pagi","jumlah":2,"tier":"3"},{"nama":"magz.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"borneotribun.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"newspaper.co.id","jumlah":2,"tier":"3"},{"nama":"publik.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"pers.co.id","jumlah":2,"tier":"3"},{"nama":"aspirasiwarga.com","jumlah":2,"tier":"3"},{"nama":"hipsi.or.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"hariini.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"jendelaindonesia.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"pontianakglobe.com","jumlah":2,"tier":"3"},{"nama":"warta.in","jumlah":2,"tier":"3"},{"nama":"suara jatim post","jumlah":2,"tier":"3"},{"nama":"cepatupdate.com","jumlah":2,"tier":"3"},{"nama":"mcinews.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"lensanetizen.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"suara indonesia","jumlah":2,"tier":"3"},{"nama":"bisnis indonesia","jumlah":2,"tier":"1"},{"nama":"suara malang","jumlah":2,"tier":"3"},{"nama":"merdeka","jumlah":2,"tier":"3"},{"nama":"suarindonesia.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"merakvox.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"tabloid sinar tani","jumlah":2,"tier":"3"},{"nama":"ketik.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"lampungsegalow.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"industri.kontan.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"tempo interactive","jumlah":2,"tier":"1"},{"nama":"tvri","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"kata kini","jumlah":2,"tier":"3"},{"nama":"kabarjakarta.net","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"portal islam","jumlah":2,"tier":"3"},{"nama":"editorialkaltim.com","jumlah":2,"tier":"3"},{"nama":"infopublik.id","jumlah":2,"tier":"3"},{"nama":"okusatu.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"sambar.id","jumlah":2,"tier":"3"},{"nama":"kumparan","jumlah":2,"tier":"1"},{"nama":"60 menit","jumlah":2,"tier":"3"},{"nama":"jurnal polisi","jumlah":2,"tier":"3"},{"nama":"makassar terkini","jumlah":2,"tier":"3"},{"nama":"detik jateng","jumlah":2,"tier":"2"},{"nama":"55tv.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"republik merdeka jabar","jumlah":1,"tier":"2"},{"nama":"ipol.id","jumlah":1,"tier":"3"},{"nama":"tvrinews.com","jumlah":1,"tier":"3"},{"nama":"kabar padang","jumlah":1,"tier":"3"},{"nama":"inilahsumbar.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tunjuk","jumlah":1,"tier":"3"},{"nama":"okezone","jumlah":1,"tier":"1"},{"nama":"pewarta.co.id","jumlah":1,"tier":"3"},{"nama":"kbe online","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"antara jateng","jumlah":1,"tier":"2"},{"nama":"harianjatim.net","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"forum keadilan","jumlah":1,"tier":"3"},{"nama":"fajar sumbar","jumlah":1,"tier":"3"},{"nama":"ekonomi.espos.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"nusantaratv.com","jumlah":1,"tier":"3"},{"nama":"ayo jakarta.com","jumlah":1,"tier":"3"},{"nama":"kepridays.co.id","jumlah":1,"tier":"3"},{"nama":"disway.id","jumlah":1,"tier":"3"},{"nama":"waspada","jumlah":1,"tier":"3"},{"nama":"ruangkota.com","jumlah":1,"tier":"3"},{"nama":"potretnusantara.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"redaksi.waspada.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"inilahkoran.id","jumlah":1,"tier":"3"},{"nama":"inilahsulsel.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"zona utara","jumlah":1,"tier":"3"},{"nama":"suara ntb","jumlah":1,"tier":"3"},{"nama":"klik warta","jumlah":1,"tier":"3"},{"nama":"hallo riau","jumlah":1,"tier":"3"},{"nama":"mnctrijaya.com","jumlah":1,"tier":"3"},{"nama":"nayantaka.id","jumlah":1,"tier":"3"},{"nama":"mediainvestigasimabes","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"purnama news","jumlah":1,"tier":"3"},{"nama":"go pena.id","jumlah":1,"tier":"3"},{"nama":"info tipikor","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"media aceh","jumlah":1,"tier":"3"},{"nama":"vivanews","jumlah":1,"tier":"1"},{"nama":"kabar kalimantan 1","jumlah":1,"tier":"3"},{"nama":"pikiran rakyat indramayu","jumlah":1,"tier":"2"},{"nama":"warta kota","jumlah":1,"tier":"3"},{"nama":"times indonesia","jumlah":1,"tier":"3"},{"nama":"jatim.times","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"zonajateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"antara","jumlah":1,"tier":"1"},{"nama":"portaljateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"metrojateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"indopolitika.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"pikiran rakyat semarang","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"seputarjateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"bogordaily.net","jumlah":1,"tier":"3"},{"nama":"rmol jateng","jumlah":1,"tier":"2"},{"nama":"radar bekasi id","jumlah":1,"tier":"3"},{"nama":"kabar trenggalek","jumlah":1,"tier":"3"},{"nama":"buserjatim.com","jumlah":1,"tier":"3"},{"nama":"insidelombok.id","jumlah":1,"tier":"3"},{"nama":"lahatsatu.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"detik bali","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jatim now","jumlah":1,"tier":"3"},{"nama":"headtopics","jumlah":1,"tier":"3"},{"nama":"kabar sulbar","jumlah":1,"tier":"3"},{"nama":"jpnn jateng","jumlah":1,"tier":"2"},{"nama":"jccnetwork.id","jumlah":1,"tier":"3"},{"nama":"pangannews.id","jumlah":1,"tier":"3"},{"nama":"radarpena.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mitra post","jumlah":1,"tier":"3"},{"nama":"indonesiakini.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radarselaparang.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suarabaru.id","jumlah":1,"tier":"3"},{"nama":"bungasbanten.id","jumlah":1,"tier":"3"},{"nama":"seriau","jumlah":1,"tier":"3"},{"nama":"jatenginsight.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tinta hijau","jumlah":1,"tier":"3"},{"nama":"menit.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"insidepontianak.com","jumlah":1,"tier":"3"},{"nama":"starbpknews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"babelinsight.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"forum nusantara news","jumlah":1,"tier":"3"},{"nama":"publikbicara.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"netizenku","jumlah":1,"tier":"3"},{"nama":"barometerindonesianews.net","jumlah":1,"tier":"3"},{"nama":"jurnalnasional.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ifakta.co","jumlah":1,"tier":"3"},{"nama":"lintascakrawalanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ini riau","jumlah":1,"tier":"3"},{"nama":"malang.disway.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"bakabar","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"timexkupang.fajar.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"inikalteng","jumlah":1,"tier":"3"},{"nama":"origin.kompas.tv","jumlah":1,"tier":"3"},{"nama":"joglo semar news","jumlah":1,"tier":"3"},{"nama":"beritapatroli.co.id","jumlah":1,"tier":"3"},{"nama":"suara pemerintah","jumlah":1,"tier":"3"},{"nama":"lombokpost.jawapos.com","jumlah":1,"tier":"3"},{"nama":"sinar harapan","jumlah":1,"tier":"3"},{"nama":"reformasibangsa.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kelumajang.com","jumlah":1,"tier":"3"},{"nama":"batam post","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"harapan rakyat","jumlah":1,"tier":"3"},{"nama":"medialampung.co.id","jumlah":1,"tier":"3"},{"nama":"fokusindonesia.com","jumlah":1,"tier":"3"},{"nama":"goriau","jumlah":1,"tier":"3"},{"nama":"kabar sebelas","jumlah":1,"tier":"3"},{"nama":"singgalang","jumlah":1,"tier":"3"},{"nama":"saranainformasi.com","jumlah":1,"tier":"3"},{"nama":"lensamata.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"liputan kini","jumlah":1,"tier":"3"},{"nama":"gurindam.id","jumlah":1,"tier":"3"},{"nama":"voi","jumlah":1,"tier":"3"},{"nama":"lensacybernews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"klikmx.com","jumlah":1,"tier":"3"},{"nama":"padusi","jumlah":1,"tier":"3"},{"nama":"nusantara.co","jumlah":1,"tier":"3"},{"nama":"kesatu","jumlah":1,"tier":"3"},{"nama":"tekape","jumlah":1,"tier":"3"},{"nama":"menaramadinah.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tribun news","jumlah":1,"tier":"1"},{"nama":"edisiindonesia.id","jumlah":1,"tier":"3"},{"nama":"peluangnews.id","jumlah":1,"tier":"3"},{"nama":"radar lombok","jumlah":1,"tier":"3"},{"nama":"pena sulbar","jumlah":1,"tier":"3"},{"nama":"wawainews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"seblang.com","jumlah":1,"tier":"3"},{"nama":"elshinta","jumlah":1,"tier":"3"},{"nama":"tirasonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"corenews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"infonusa-news.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"dakta","jumlah":1,"tier":"3"},{"nama":"penjurupos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"barito post","jumlah":1,"tier":"3"},{"nama":"pojok banua","jumlah":1,"tier":"3"},{"nama":"detik finance","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"koran ntb","jumlah":1,"tier":"3"},{"nama":"post kota ntb","jumlah":1,"tier":"3"},{"nama":"bualbual.com","jumlah":1,"tier":"3"},{"nama":"orasi rakyat","jumlah":1,"tier":"3"},{"nama":"strateginews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sumut.pikiran-rakyat.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"fajarnusa.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"fusilatnews.com","jumlah":1,"tier":"3"},{"nama":"sultramedia.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ekonomi bisnis","jumlah":1,"tier":"1"},{"nama":"palopopos","jumlah":1,"tier":"3"},{"nama":"liputan4.com","jumlah":1,"tier":"3"},{"nama":"infobalinews.id","jumlah":1,"tier":"3"},{"nama":"portal indo news","jumlah":1,"tier":"3"},{"nama":"warta pos","jumlah":1,"tier":"3"},{"nama":"borneoflash.com","jumlah":1,"tier":"3"},{"nama":"pedoman.media","jumlah":1,"tier":"3"},{"nama":"infobanknews","jumlah":1,"tier":"3"},{"nama":"koranindopos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kulturnativ","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"benhillpos.com","jumlah":1,"tier":"3"},{"nama":"news.republika.co.id","jumlah":1,"tier":"3"},{"nama":"86 news","jumlah":1,"tier":"3"},{"nama":"smnnews.co.id","jumlah":1,"tier":"3"},{"nama":"bisnisupdate.com","jumlah":1,"tier":"3"},{"nama":"radaraktual.com","jumlah":1,"tier":"3"},{"nama":"matta news","jumlah":1,"tier":"3"},{"nama":"strategi.id","jumlah":1,"tier":"3"},{"nama":"beritabuana.com","jumlah":1,"tier":"3"},{"nama":"brilian news","jumlah":1,"tier":"3"},{"nama":"joss.co.id","jumlah":1,"tier":"3"},{"nama":"pikiran rakyat","jumlah":1,"tier":"2"},{"nama":"ruangbibir.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lensakalimaya.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"malang post","jumlah":1,"tier":"3"},{"nama":"timenews.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radarferryonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tribun news malang","jumlah":1,"tier":"2"},{"nama":"aspek.id","jumlah":1,"tier":"3"},{"nama":"ntbsatu.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kick news","jumlah":1,"tier":"3"},{"nama":"sukabumiku.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"simpulindonesia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"idx channel","jumlah":1,"tier":"1"},{"nama":"klikindonesia.co.id","jumlah":1,"tier":"3"},{"nama":"sumedang ekspres","jumlah":1,"tier":"3"},{"nama":"dataindonesia.id","jumlah":1,"tier":"3"},{"nama":"distriknews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"aspirasiku.id","jumlah":1,"tier":"3"},{"nama":"sumsel update","jumlah":1,"tier":"3"},{"nama":"inilahgorontalo.com","jumlah":1,"tier":"3"},{"nama":"cakrawalanusantara.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"javasatu.com","jumlah":1,"tier":"3"},{"nama":"inilahkendari.com","jumlah":1,"tier":"3"},{"nama":"lintas riau news","jumlah":1,"tier":"3"},{"nama":"sindikat post","jumlah":1,"tier":"3"},{"nama":"fajarbali.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suluh kepri","jumlah":1,"tier":"3"},{"nama":"warta ekonomi","jumlah":1,"tier":"1"},{"nama":"indragiri hulu government","jumlah":1,"tier":"3"},{"nama":"voiceindonesia.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"iqplus","jumlah":1,"tier":"3"},{"nama":"kaltenglima.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"koran kontan","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampungnesia.com","jumlah":1,"tier":"3"},{"nama":"fortune indonesia","jumlah":1,"tier":"3"},{"nama":"lentera.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"dprd.jogjakota.go.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"analisa daily","jumlah":1,"tier":"3"},{"nama":"aceh kontras","jumlah":1,"tier":"3"},{"nama":"ivooxid","jumlah":1,"tier":"3"},{"nama":"batamclick","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"selarasonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"refubliknews.com","jumlah":1,"tier":"3"},{"nama":"hastara.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"generasi.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"baranews aceh","jumlah":1,"tier":"3"},{"nama":"channel9.id","jumlah":1,"tier":"3"},{"nama":"pamekasan times","jumlah":1,"tier":"3"},{"nama":"jatim times","jumlah":1,"tier":"3"},{"nama":"gresik.jatimtimes","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"banyuwangi.jatimtimes.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"malang times","jumlah":1,"tier":"3"},{"nama":"surabaya times","jumlah":1,"tier":"3"},{"nama":"mojokerto.jatimtimes.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jakartasatu","jumlah":1,"tier":"3"},{"nama":"rakyat merdeka","jumlah":1,"tier":"3"},{"nama":"reporter.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"vnnmedia.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"solo.suaramerdeka","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"patraindonesia.com","jumlah":1,"tier":"3"},{"nama":"harian berkat","jumlah":1,"tier":"3"},{"nama":"medcom.id","jumlah":1,"tier":"1"},{"nama":"retizen.republika.co.id","jumlah":1,"tier":"3"},{"nama":"corebusiness.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kuninganoke.com","jumlah":1,"tier":"3"},{"nama":"lubuklinggau.pikiran-rakyat.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampost.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"musionline.co.id","jumlah":1,"tier":"3"},{"nama":"metropolitan","jumlah":1,"tier":"3"},{"nama":"berita jakarta","jumlah":1,"tier":"3"},{"nama":"mediainformasiindonesia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kaganga","jumlah":1,"tier":"3"},{"nama":"gerbang patriot","jumlah":1,"tier":"3"},{"nama":"radarpekalongan.disway.id","jumlah":1,"tier":"3"},{"nama":"poskota.net","jumlah":1,"tier":"3"},{"nama":"kbanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"matapenna.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"keuangan news","jumlah":1,"tier":"3"},{"nama":"suluhnews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"indonesiasatu.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jurnalis.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"nemangkawipos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"banten.idntimes.com","jumlah":1,"tier":"3"},{"nama":"palpos.bacakoran.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sonora fm","jumlah":1,"tier":"3"},{"nama":"langit 7","jumlah":1,"tier":"3"},{"nama":"infodenpasar.id","jumlah":1,"tier":"3"},{"nama":"duta metro .com","jumlah":1,"tier":"3"},{"nama":"harianbengkuluekspress.bacakoran.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"idnnews.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radar nonstop","jumlah":1,"tier":"3"},{"nama":"balige.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"eventguide.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"afederasi.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suarasukabumi.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jatim pos online","jumlah":1,"tier":"3"},{"nama":"suara papua","jumlah":1,"tier":"3"},{"nama":"jatim pos","jumlah":1,"tier":"3"},{"nama":"bali post","jumlah":1,"tier":"3"},{"nama":"swarakonsumenindonesia.com","jumlah":1,"tier":"3"},{"nama":"pratamanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"newguineakurir.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sasagupapua.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jaringnews.co.id","jumlah":1,"tier":"3"},{"nama":"todaynews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"semarak.co","jumlah":1,"tier":"3"},{"nama":"bithe.co","jumlah":1,"tier":"3"},{"nama":"berikabar.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sinar pos","jumlah":1,"tier":"3"},{"nama":"tabloid kontan","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sultratop.com","jumlah":1,"tier":"3"},{"nama":"harian.disway.id","jumlah":1,"tier":"3"},{"nama":"sultrapedia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"republik merdeka sumsel","jumlah":1,"tier":"2"},{"nama":"terassultra.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartaminangnews.com","jumlah":1,"tier":"3"},{"nama":"banten raya","jumlah":1,"tier":"3"},{"nama":"suaratani.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"penasultra.id","jumlah":1,"tier":"3"},{"nama":"beritagambar.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kaltim post","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartadigital.id","jumlah":1,"tier":"3"},{"nama":"sigerindo","jumlah":1,"tier":"3"},{"nama":"extranews","jumlah":1,"tier":"3"},{"nama":"pranala.co","jumlah":1,"tier":"3"},{"nama":"tribratanews polda kaltim","jumlah":1,"tier":"3"},{"nama":"realitasonline.id","jumlah":1,"tier":"3"},{"nama":"prestasi reformasi","jumlah":1,"tier":"3"},{"nama":"delitimes.id","jumlah":1,"tier":"3"},{"nama":"hariansumut.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"narasi publik","jumlah":1,"tier":"3"},{"nama":"gosumut.com","jumlah":1,"tier":"3"},{"nama":"newsindonesia.net","jumlah":1,"tier":"3"},{"nama":"bogor update","jumlah":1,"tier":"3"},{"nama":"bsn.go.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"time today","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampung one","jumlah":1,"tier":"3"},{"nama":"hargo","jumlah":1,"tier":"3"},{"nama":"kedaipena","jumlah":1,"tier":"3"},{"nama":"lensa medan","jumlah":1,"tier":"3"},{"nama":"ditjenpas","jumlah":1,"tier":"3"},{"nama":"menitnews","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suara pemred kalbar","jumlah":1,"tier":"3"},{"nama":"sorongraya.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartajatim.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kabarreformasi.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sundapost.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"priangantimur","jumlah":1,"tier":"2"},{"nama":"bongkarpost.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"target news","jumlah":1,"tier":"3"},{"nama":"akuntabel.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sulsel.fajar.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"filalin.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mediakampung.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mojok","jumlah":1,"tier":"3"}];
+const summaryNews       = [{"judul":"Penguatan keamanan pangan MBG lewat arahan wakil presiden dan penegakan SLHS","detail":"Wakil Presiden Gibran memerintahkan BGN memperketat keamanan pangan, menghentikan sementara operasi lebih dari 1.700 SPPG hingga 24 April 2026 dan mewajibkan Sertifikat Laik Higiene Sanitasi (SLHS) untuk semua dapur. Pemeriksaan menemukan 38 SPPG tanpa instalasi pengolahan limbah, yang akan dipantau melalui National Command Center yang akan diluncurkan."},{"judul":"Skala ekspansi MBG dan SPPG mencapai ribuan unit, dorong ekonomi lokal","detail":"Pada akhir April 2026 ada lebih dari 1.700 SPPG beroperasi, melayani ribuan penerima manfaat, termasuk 1.015 siswa di Pekanbaru dan 1.509 peserta di Bogor. Permintaan bahan baku lokal melonjak, meningkatkan produksi perikanan di Pati, sayuran petani, dan omzet pedagang buah di Jakarta. Pemerintah menargetkan total 14.646 SPPG secara nasional."},{"judul":"Anggaran MBG melonjak dan regulasi baru untuk efisiensi biaya","detail":"Anggaran MBG naik dari Rp71 triliun (2025) menjadi Rp171 triliun (2026). Penghapusan layanan MBG pada hari Sabtu diproyeksikan menghemat Rp1 triliun per hari atau sekitar Rp50 triliun per tahun. Permenko baru mengatur penggunaan bahan baku lokal dan wajib sertifikasi SLHS bagi semua dapur."},{"judul":"Digitalisasi dan koordinasi nasional melalui MBG National Command Center","detail":"Kementerian Koordinator Bidang Pangan akan meluncurkan National Command Center MBG pada pertengahan Mei 2026, mengintegrasikan Sistem Informasi Pemenuhan Gizi Nasional (SIPGN) dan teknologi IoT. Platform ini melibatkan kader posyandu, Babinsa, dan Bhabinkamtibmas di lebih dari 40.000 desa untuk pendataan real‑time dan respons cepat terhadap insiden keamanan pangan."},{"judul":"Insiden keracunan makanan menguji kepercayaan publik dan penanganan korupsi","detail":"Kasus keracunan massal terjadi di Pringgasela (51 korban) dan Leles (134 anak), serta kematian balita berusia 2 tahun di Cianjur, memicu penyelidikan KPK yang menemukan delapan titik rawan korupsi dalam pengelolaan MBG. BGN membantah hubungannya dengan kematian tersebut melalui lebih dari 40 rilis pers, berupaya menstabilkan persepsi publik."},{"judul":"Program MBG berkontribusi pada penurunan kemiskinan ekstrem terbawah","detail":"Kemiskinan ekstrem turun ke rekor terendah 0,78 % pada April 2026, dari 1,26 % pada Maret 2024, mengurangi sekitar 1,36 juta orang. Penurunan ini dikaitkan dengan program anti‑kemiskinan terintegrasi, termasuk penyaluran BLT desa dan perluasan jangkauan MBG yang menyediakan gizi dasar bagi keluarga miskin."},{"judul":"Reshuffle kabinet dan fokus kebijakan strategis pada ketahanan pangan serta energi","detail":"Presiden Prabowo melakukan reshuffle kabinet kelima pada 27 April 2026, menempatkan pejabat baru di lembaga kunci untuk memperkuat pelaksanaan program prioritas seperti MBG. Secara paralel, pemerintah mempercepat pengembangan CNG untuk mengurangi ketergantungan LPG impor dan memantau tekanan nilai tukar guna menjaga ketahanan pangan dan energi domestik."}];
+const influencer        = [{"rank":1,"influencer":"nanik sudaryati deyang","total_mention":237,"jabatan":"Wakil Kepala Badan Gizi Nasional (BGN) Bidang Komunikasi Publik dan Investigasi","opinion":"dari total 2.174 penerima manfaat lain yang turut mengonsumsi MBG pada tanggal 14 April di wilayah tersebut, tidak ada laporan satupun yang mengalami gangguan pencernaan atau keluhan kesehatan serupa.","foto":""},{"rank":2,"influencer":"juda agung","total_mention":190,"jabatan":"Wakil Menteri Keuangan","opinion":"\"Kami tetap menjalankan program prioritas, tetapi dengan kualitas yang lebih baik dan lebih tepat sasaran. Sebelumnya MBG diberikan hingga Sabtu, sekarang dihapus. Pengurangan satu hari ini dapat menghemat sekitar Rp1 triliun. Dalam setahun, penghematan bisa mencapai Rp50 triliun,\"","foto":""},{"rank":3,"influencer":"nani hendiarti","total_mention":143,"jabatan":"Deputi Bidang Koordinasi Keterjangkauan dan Keamanan Pangan Kemenko Pangan","opinion":"salah satu yang diatur dalam peraturan ini adalah pihak-pihak yang terlibat dalam keamanan pangan, seperti Badan Pengawas Obat dan Makanan (BPOM), Kementerian Kesehatan hingga Kementerian Kelautan dan Perikanan di poin kedua keamanan pangan terpadu bahwa siapa aja yang terlibat di Indonesia jadi cukup banyak dari aspek PP di mandat untuk dibagi 6 kelompok, pangan olahan di BPOM, jadi BPOM udah ada PP 86 diperjelas pangan olahan di BPOM pangan olahan industri rumah tangga di Pemda, pangan siap saji di Kemenkes,","foto":""},{"rank":4,"influencer":"sudaryono","total_mention":111,"jabatan":"Ketua Umum Himpunan Kerukunan Tani Indonesia","opinion":"\"Sebagai informasi, saat ini alhamdulillah berkat Prof. Dadan Hindayana Kepala BGN, tidak ada lagi petani sayur yang buang wortelnya, tidak ada lagi petani buah-buahan yang buang pisangnya, tidak ada lagi petani kita yang buang sayur-mayur yang tidak laku di pasar, tidak ada lagi petani kita yang kemudian susah menjual barang pertanian, karena sebagian besar diserap oleh Badan Gizi Nasional dan SPPG untuk MBG kita,\"","foto":""},{"rank":5,"influencer":"muhaimin iskandar","total_mention":104,"jabatan":"MENTERI Koordinator Bidang Pemberdayaan Masyarakat","opinion":"MBG akan terus disempurnakan melalui evaluasi berbasis data dan masukan publik. Transparansi dan kecepatan respons menjadi kunci dalam menjaga kepercayaan masyarakat. Dengan langkah-langkah ini, MBG diharapkan tidak hanya menjadi program bantuan, tetapi juga investasi jangka panjang bagi kesehatan dan kesejahteraan generasi bangsa.\"","foto":""},{"rank":6,"influencer":"nani","total_mention":93,"jabatan":"","opinion":"\"Pembentukan Permenko tersebut bertujuan untuk menjalankan amanat dari Peraturan Presiden (Perpres) Nomor 115 Tahun 2025 tentang Tata Kelola Penyelenggaraan Program Makan Bergizi Gratis, yang mengamanatkan Kemenko Pangan untuk mengoordinasikan berbagai kementerian atau lembaga dalam menjamin rantai pasok pangan pada MBG,\"","foto":""},{"rank":7,"influencer":"prabowo subianto","total_mention":89,"jabatan":"Presiden RI","opinion":"\"Di Nusa Tenggara Timur saat ini ada 1.399 unit (KDKMP) yang sedang dibangun dan sudah selesai sekitar 40 unit. Nanti pada saat operasional kita akan dorong agar KDKMP juga dapat menyuplai kebutuhan bahan baku dan bermitra dengan SPPG (Satuan Pelayanan Pemenuhan Gizi) untuk program MBG (Makan Bergizi Gratis),\"","foto":"https://kab-jayawijaya.kpu.go.id/public/kab-jayawijaya/images/1761534271_c7daffd1b94dc3f39769.jpg"},{"rank":8,"influencer":"abdul rivai ras","total_mention":79,"jabatan":"Ketua Umum APPMBGI","opinion":"\"APPMBGI berperan sebagai penghubung antara pelaku usaha, pemasok, investor, dan pengelola dapur dalam satu ekosistem terintegrasi. Upaya ini sekaligus mendorong pemberdayaan ekonomi lokal, termasuk pelaku UMKM dan pasar tradisional,\"","foto":""},{"rank":9,"influencer":"dadan hindayana","total_mention":66,"jabatan":"Kepala BGN","opinion":"\"Itu butuh perlengkapan, butuh peralatan untuk software dan itu anggaran itu segitu, perlu disampaikan anggaran itu 1,2 tapi dalam pelaksanaannya hanya terserap 550 miliar, jadi tidak semua digunakna, yang kita gak gunakan kita kembalikan ke kas,\"","foto":"https://awsimages.detik.net.id/visual/2025/10/21/kepala-badan-gizi-nasional-bgn-dadan-hindayana-reuterswilly-kurniawan-1761038035632_169.jpeg?w=650&q=80"},{"rank":10,"influencer":"edward candra","total_mention":66,"jabatan":"Sekretaris Daerah Provinsi Sumatera Selatan","opinion":"\"Perencanaan yang baik tidak lahir dari satu pemikiran, melainkan dari kolaborasi berbagai pihak dengan tujuan yang sama. Sinergi adalah kunci. Rakortekrenbang hari ini menjadi langkah awal merajut ide menjadi rencana pembangunan yang kokoh dan berdampak,\"","foto":""}];
+const sentiment         = {"total":9358,"positif":2272,"negatif":3277,"netral":3809};
+const emotion           = {"surprise":364,"trust":1008,"anticipation":1466,"neutral":4563,"sadness":289,"joy":196,"disgust":1216,"fear":81,"anger":172};
+const wordcloud         = [{"word":"fokus mbg diperjelas","count":303},{"word":"makan bergizi gratis","count":276},{"word":"dapur mbg","count":158},{"word":"tepat sasaran","count":110},{"word":"pramoedya ananta toer","count":86},{"word":"mobil mbg","count":83},{"word":"menu mbg","count":74},{"word":"gua bang","count":52},{"word":"makan mbg","count":50},{"word":"ompreng mbg","count":41},{"word":":wajah _menangis_keras","count":38},{"word":"stop mbg","count":37},{"word":"terima kasih","count":36},{"word":"memperkuat rantai pasok komunitas","count":36},{"word":"pegawai mbg","count":35},{"word":"keracunan mbg","count":34},{"word":"anak sekolah","count":33},{"word":"anggaran mbg","count":31},{"word":"penerima manfaat","count":31},{"word":"memperkuat komunitas","count":31},{"word":"melipa t_t angan","count":29},{"word":"permintaan pangan lokal","count":29},{"word":"gizi anak","count":28},{"word":"proyek ddt manggarai cikarang","count":28},{"word":"kepala bgn","count":27},{"word":"makan bergizi gratis mendukung pangan lokal","count":27},{"word":"gizi nasional","count":26},{"word":"kasus keracunan","count":26},{"word":"melipa t_t angan_warna_kulit_cerah","count":26},{"word":"stasiun bekasi timur","count":26},{"word":"biaya mbg","count":26},{"word":"pemenuhan gizi","count":25},{"word":"turut berduka cita","count":25},{"word":"koperasi merah putih","count":24},{"word":"kecelakaan krl","count":24},{"word":"ibu hamil","count":23},{"word":"mbg tertunda","count":23},{"word":"pemangku jabatan","count":23},{"word":"argo bromo angrek","count":23},{"word":"ceo mbg","count":23},{"word":"kopdes triliunan","count":22},{"word":"mari kawal bersama","count":22},{"word":"keuntungan pengelolanya","count":21},{"word":"kepentingan bisnis permanen","count":21},{"word":"pengusaha dapur","count":20},{"word":"sppg disuspend","count":20},{"word":"dana mbg","count":20},{"word":"tersangkanya,rakyat diam,parlemen diam,aktivis akedimisi","count":20},{"word":"tua anak keracunan disuruh bayar pajak","count":20},{"word":"nyawa hilang,satupun","count":20}];
+const summarySocmed     = {"positif":[{"judul":"MBG meningkatkan gizi anak, menurunkan stunting, dan mendongkrak prestasi belajar","detail":"Orangtua, guru, dan siswa melaporkan bahwa anak‑anak yang menerima Makan Bergizi Gratis menjadi lebih sehat, lebih fokus di kelas, dan angka stunting turun signifikan, sehingga nilai rapor meningkat secara nyata.","platform":["Twitter","TikTok","Instagram","Threads","YouTube"],"emosi":"joy"},{"judul":"Program ini menciptakan pasar stabil dan pendapatan tambahan bagi petani, nelayan, serta UMKM lokal","detail":"Para petani, nelayan, dan pelaku usaha kecil menyatakan adanya lonjakan permintaan bahan pangan, harga lebih stabil, serta ribuan pekerjaan baru di logistik dan produksi yang dihasilkan dari dapur MBG.","platform":["Twitter","TikTok","Instagram","Facebook"],"emosi":"trust"},{"judul":"Digitalisasi dan sistem monitoring real‑time meningkatkan transparansi serta kepercayaan publik","detail":"Sistem digital yang memantau stok, distribusi, dan kualitas makanan secara real‑time memungkinkan sekolah mengajukan komplain langsung, sehingga masyarakat menilai program lebih akuntabel dan dapat dipercaya.","platform":["Twitter","TikTok","YouTube"],"emosi":"hopeful"},{"judul":"Masyarakat secara luas menggalang dukungan untuk memperpanjang dan memperbaiki MBG","detail":"Hashtag seperti #LanjutkanMBG dan #MBG25Tahun menjadi viral, menunjukkan harapan kuat warga agar program berlanjut dalam jangka panjang dengan kualitas yang lebih baik.","platform":["Twitter","TikTok","Threads"],"emosi":"hope"},{"judul":"Penegakan standar dan penutupan dapur yang tidak patuh meningkatkan keyakinan terhadap kualitas program","detail":"Pemerintah menangguhkan ribuan SPPG yang melanggar standar, tindakan ini dipuji karena melindungi hak anak dan memastikan penggunaan dana yang tepat.","platform":["Twitter","Threads","Facebook"],"emosi":"trust"}],"negatif":[{"judul":"Laporan makanan basi, kontaminasi, dan kasus keracunan menimbulkan rasa takut terhadap keamanan MBG","detail":"Netizen membagikan foto makanan busuk, bau tak sedap, bahkan belatung, serta mengklaim adanya kasus keracunan massal yang menimbulkan kecemasan akan keselamatan anak‑anak di sekolah.","platform":["Twitter","TikTok","Instagram","YouTube"],"emosi":"fear"},{"judul":"Isu korupsi, pemborosan anggaran, dan pengeluaran untuk item non‑food memicu kemarahan publik","detail":"Pengguna menuduh triliunan rupiah MBG dialokasikan untuk IT, lisensi Zoom, mobil, dan proyek pribadi pejabat, sehingga menimbulkan kecurigaan akan penyalahgunaan dana publik.","platform":["Twitter","TikTok","Facebook","Instagram"],"emosi":"anger"},{"judul":"Beban tambahan bagi guru serta masalah operasional dapur mengakibatkan frustrasi dan rasa sedih","detail":"Guru harus mengawasi distribusi, mengisi laporan ekstra, dan menghadapi penangguhan operasional SPPG, yang menyebabkan keletihan dan kekecewaan di kalangan tenaga pendidik.","platform":["Twitter","TikTok","Facebook"],"emosi":"sad"},{"judul":"Kekhawatiran bahwa MBG mengorbankan prioritas belanja negara seperti pendidikan dan infrastruktur","detail":"Warga menilai biaya harian MBG mengurangi anggaran untuk gaji guru, proyek kereta, dan layanan kesehatan, sehingga menimbulkan ketidakpuasan terhadap prioritas pemerintah.","platform":["Twitter","TikTok"],"emosi":"anger"},{"judul":"Seruan menghentikan atau memangkas program karena beban fiskal memunculkan ketakutan akan defisit","detail":"Kelompok netizen menyerukan pengurangan hari operasional atau penghentian total MBG demi mencegah defisit APBN yang semakin besar, mencerminkan kekhawatiran akan dampak ekonomi makro.","platform":["Twitter","TikTok"],"emosi":"fear"}]};
+const rekomendasi       = [{"judul":"Pembentukan Sistem Jaminan Keamanan Pangan Terpadu untuk MBG","latar":"Keluhan besar terkait makanan basi, keracunan, dan penyakit menular menimbulkan rasa takut dan marah di publik.","rekomendasi":"Buat unit khusus di Kementerian Kesehatan bekerja sama dengan Kementerian Pendidikan, Badan Pengawas Obat dan Makanan (BPOM), serta Polri untuk melakukan inspeksi harian, sertifikasi SOP dapur, dan pelaporan real‑time melalui aplikasi digital. Terapkan standar HACCP wajib bagi semua SPPG, serta sanksi tegas (penutupan dan denda) bagi dapur yang melanggar. Selenggarakan pelatihan hygienic handling bagi petugas dapur setiap tiga bulan dan publikasikan hasil audit secara terbuka.","prioritas":"tinggi","sasaran":"Kementerian Kesehatan, Kementerian Pendidikan, BPOM, Polri"},{"judul":"Transparansi Anggaran dan Audit Independen MBM","latar":"Netizen mencurigai pemborosan triliunan rupiah untuk IT, Zoom, mobil, serta potensi korupsi yang memicu kemarahan dan ketidakpercayaan.","rekomendasi":"Luncurkan portal daring terbuka yang menampilkan rincian belanja MBG per provinsi, termasuk kontrak IT, transportasi, dan logistik. Bentuk tim audit gabungan antara KPK, Kementerian Keuangan, dan Badan Pemeriksa Keuangan (BPK) dengan mandat mengaudit setiap kuartal dan mempublikasikan laporan audit dalam 30 hari. Terapkan mekanisme whistleblowing anonim serta sistem reward bagi yang melaporkan penyalahgunaan dana.","prioritas":"tinggi","sasaran":"Kementerian Keuangan, KPK, BPK"},{"judul":"Penguatan Platform Digital Monitoring dan Pengaduan MBG","latar":"Sentimen positif tentang digitalisasi menunjukkan potensi besar, namun masih ada celah dalam pelaporan kualitas makanan dan beban administratif guru.","rekomendasi":"Kembangkan aplikasi berbasis cloud yang terintegrasi dengan sistem manajemen sekolah untuk mencatat stok, distribusi, dan feedback menu secara real‑time. Tambahkan modul pengaduan yang dapat diakses guru dan orang tua, dengan SLA penanganan 48 jam. Sediakan pelatihan digital bagi guru SARPRAS serta insentif bagi sekolah yang mencapai rating kualitas >90%.","prioritas":"sedang","sasaran":"Kementerian Pendidikan, Kementerian Komunikasi dan Informatika"},{"judul":"Optimalisasi Rantai Pasok Lokal untuk Pemberdayaan Petani dan UMKM","latar":"Postingan positif menyoroti peningkatan pendapatan petani, nelayan, dan pelaku UMKM, sehingga program MBG dapat menjadi penggerak ekonomi regional.","rekomendasi":"Bentuk klaster pemasok pertanian berbasis wilayah yang terdaftar resmi di Kementerian Pertanian, dengan kontrak jangka panjang minimal tiga tahun. Berikan sertifikasi “Pemasok MBG” yang memberi prioritas pembelian, akses kredit mikro, dan pelatihan peningkatan kualitas produk. Fasilitasi transportasi via armada pemerintah atau koperasi logistik untuk mengurangi biaya distribusi dan memastikan ketepatan waktu pengiriman ke dapur SPPG.","prioritas":"sedang","sasaran":"Kementerian Pertanian, Kementerian Koperasi dan UKM"}];
+const platSocmed        = [{"nama":"twitter","jumlah":6685},{"nama":"tiktok","jumlah":1798},{"nama":"facebook","jumlah":346},{"nama":"instagram","jumlah":240},{"nama":"youtube","jumlah":193},{"nama":"threads","jumlah":96}];
+const tier_distribution = [{"tier":"Tier 1","jumlah":129},{"tier":"Tier 2","jumlah":15},{"tier":"Tier 3","jumlah":419},{"tier":"Tier Tidak Diketahui","jumlah":275}];
+const media_with_tier   = [{"nama":"cnbc indonesia","jumlah":21,"tier":"1"},{"nama":"kompas","jumlah":17,"tier":"1"},{"nama":"infoterkini.id","jumlah":17,"tier":"Tidak Diketahui"},{"nama":"muda news","jumlah":16,"tier":"3"},{"nama":"wartaalor.com","jumlah":13,"tier":"Tidak Diketahui"},{"nama":"asatunews.co.id","jumlah":12,"tier":"3"},{"nama":"stg.ntvnews.id","jumlah":9,"tier":"Tidak Diketahui"},{"nama":"flores.pikiran-rakyat.com","jumlah":8,"tier":"Tidak Diketahui"},{"nama":"kompas.id","jumlah":8,"tier":"1"},{"nama":"radarmedia.id","jumlah":7,"tier":"Tidak Diketahui"},{"nama":"koran jakarta","jumlah":7,"tier":"3"},{"nama":"pantau","jumlah":7,"tier":"3"},{"nama":"detik","jumlah":7,"tier":"1"},{"nama":"klive tv indonesia","jumlah":7,"tier":"3"},{"nama":"jakarta365.net","jumlah":6,"tier":"Tidak Diketahui"},{"nama":"investor daily","jumlah":6,"tier":"1"},{"nama":"harian terbit","jumlah":6,"tier":"3"},{"nama":"metro tv","jumlah":6,"tier":"1"},{"nama":"berita merdeka","jumlah":6,"tier":"3"},{"nama":"majalah tempo","jumlah":6,"tier":"Tidak Diketahui"},{"nama":"pikiran rakyat jabar","jumlah":6,"tier":"3"},{"nama":"money.kompas.com","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"liputan6 sragen","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"rm.id","jumlah":5,"tier":"1"},{"nama":"readers.id","jumlah":5,"tier":"3"},{"nama":"rrinews","jumlah":5,"tier":"1"},{"nama":"malanghits.pikiran-rakyat.com","jumlah":5,"tier":"3"},{"nama":"panennews.com","jumlah":5,"tier":"3"},{"nama":"ntvnews.id","jumlah":5,"tier":"Tidak Diketahui"},{"nama":"memorandum.disway.id","jumlah":5,"tier":"3"},{"nama":"kontan","jumlah":5,"tier":"1"},{"nama":"idn times","jumlah":4,"tier":"1"},{"nama":"berita jatim","jumlah":4,"tier":"3"},{"nama":"republika","jumlah":4,"tier":"1"},{"nama":"republik merdeka","jumlah":4,"tier":"1"},{"nama":"tvonenews","jumlah":4,"tier":"3"},{"nama":"akurat.co","jumlah":4,"tier":"3"},{"nama":"tempo.co","jumlah":4,"tier":"1"},{"nama":"harianbasis.co","jumlah":4,"tier":"Tidak Diketahui"},{"nama":"detik jabar","jumlah":4,"tier":"2"},{"nama":"pantau.com","jumlah":4,"tier":"Tidak Diketahui"},{"nama":"kabarsenator.com","jumlah":4,"tier":"3"},{"nama":"meuligoe aceh","jumlah":3,"tier":"3"},{"nama":"liputan 6","jumlah":3,"tier":"1"},{"nama":"inilahkalsel.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"berita satu","jumlah":3,"tier":"1"},{"nama":"suaranusantara.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"poskota","jumlah":3,"tier":"3"},{"nama":"indo zone","jumlah":3,"tier":"1"},{"nama":"suara surabaya","jumlah":3,"tier":"3"},{"nama":"lambeturah.co.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"gledeknews.com","jumlah":3,"tier":"3"},{"nama":"betawipos.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"kanal indonesia","jumlah":3,"tier":"3"},{"nama":"bukurepublika.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"kompasiana","jumlah":3,"tier":"3"},{"nama":"beritasampit.com","jumlah":3,"tier":"3"},{"nama":"jawa pos","jumlah":3,"tier":"1"},{"nama":"kabar-priangan","jumlah":3,"tier":"3"},{"nama":"ruangharian.com","jumlah":3,"tier":"3"},{"nama":"kabarterbaru.info","jumlah":3,"tier":"3"},{"nama":"cnn indonesia","jumlah":3,"tier":"1"},{"nama":"malangposcomedia.id","jumlah":3,"tier":"3"},{"nama":"klikmaluku.com","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"harianbhirawa.co.id","jumlah":3,"tier":"3"},{"nama":"jurnas","jumlah":3,"tier":"3"},{"nama":"mediadinamikaglobal.id","jumlah":3,"tier":"3"},{"nama":"alonesia.com","jumlah":3,"tier":"3"},{"nama":"ibenews.id","jumlah":3,"tier":"Tidak Diketahui"},{"nama":"valid news","jumlah":2,"tier":"3"},{"nama":"voi.id","jumlah":2,"tier":"3"},{"nama":"inews portal","jumlah":2,"tier":"1"},{"nama":"tangsel pos","jumlah":2,"tier":"3"},{"nama":"haloindonesia.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"balpos","jumlah":2,"tier":"3"},{"nama":"bitvonline.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"fajar","jumlah":2,"tier":"3"},{"nama":"tebaran.com","jumlah":2,"tier":"3"},{"nama":"infomalangraya.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"rakyatsulsel.fajar.co.id","jumlah":2,"tier":"3"},{"nama":"mediatujuh.com","jumlah":2,"tier":"3"},{"nama":"merdekanews","jumlah":2,"tier":"3"},{"nama":"media indonesia","jumlah":2,"tier":"1"},{"nama":"daulat.co","jumlah":2,"tier":"3"},{"nama":"mistar.id","jumlah":2,"tier":"3"},{"nama":"cakrakrisna.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"liranews.com","jumlah":2,"tier":"3"},{"nama":"laros.id","jumlah":2,"tier":"3"},{"nama":"bahtera jateng","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"radar depok","jumlah":2,"tier":"3"},{"nama":"depokraya.pikiran-rakyat.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"radar banten","jumlah":2,"tier":"3"},{"nama":"jateng.kilat.com","jumlah":2,"tier":"3"},{"nama":"katadata","jumlah":2,"tier":"3"},{"nama":"tribratanews polri","jumlah":2,"tier":"3"},{"nama":"cakrawala.co","jumlah":2,"tier":"3"},{"nama":"kilat.com","jumlah":2,"tier":"3"},{"nama":"neraca","jumlah":2,"tier":"3"},{"nama":"holopis.com","jumlah":2,"tier":"3"},{"nama":"cinews","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"indonesia satu","jumlah":2,"tier":"3"},{"nama":"kabarbaik.co","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"garuda.tv","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"surabaya pagi","jumlah":2,"tier":"3"},{"nama":"magz.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"borneotribun.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"newspaper.co.id","jumlah":2,"tier":"3"},{"nama":"publik.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"pers.co.id","jumlah":2,"tier":"3"},{"nama":"aspirasiwarga.com","jumlah":2,"tier":"3"},{"nama":"hipsi.or.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"hariini.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"jendelaindonesia.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"pontianakglobe.com","jumlah":2,"tier":"3"},{"nama":"warta.in","jumlah":2,"tier":"3"},{"nama":"suara jatim post","jumlah":2,"tier":"3"},{"nama":"cepatupdate.com","jumlah":2,"tier":"3"},{"nama":"mcinews.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"lensanetizen.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"suara indonesia","jumlah":2,"tier":"3"},{"nama":"bisnis indonesia","jumlah":2,"tier":"1"},{"nama":"suara malang","jumlah":2,"tier":"3"},{"nama":"merdeka","jumlah":2,"tier":"3"},{"nama":"suarindonesia.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"merakvox.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"tabloid sinar tani","jumlah":2,"tier":"3"},{"nama":"ketik.com","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"lampungsegalow.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"industri.kontan.co.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"tempo interactive","jumlah":2,"tier":"1"},{"nama":"tvri","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"kata kini","jumlah":2,"tier":"3"},{"nama":"kabarjakarta.net","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"portal islam","jumlah":2,"tier":"3"},{"nama":"editorialkaltim.com","jumlah":2,"tier":"3"},{"nama":"infopublik.id","jumlah":2,"tier":"3"},{"nama":"okusatu.id","jumlah":2,"tier":"Tidak Diketahui"},{"nama":"sambar.id","jumlah":2,"tier":"3"},{"nama":"kumparan","jumlah":2,"tier":"1"},{"nama":"60 menit","jumlah":2,"tier":"3"},{"nama":"jurnal polisi","jumlah":2,"tier":"3"},{"nama":"makassar terkini","jumlah":2,"tier":"3"},{"nama":"detik jateng","jumlah":2,"tier":"2"},{"nama":"55tv.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"republik merdeka jabar","jumlah":1,"tier":"2"},{"nama":"ipol.id","jumlah":1,"tier":"3"},{"nama":"tvrinews.com","jumlah":1,"tier":"3"},{"nama":"kabar padang","jumlah":1,"tier":"3"},{"nama":"inilahsumbar.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tunjuk","jumlah":1,"tier":"3"},{"nama":"okezone","jumlah":1,"tier":"1"},{"nama":"pewarta.co.id","jumlah":1,"tier":"3"},{"nama":"kbe online","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"antara jateng","jumlah":1,"tier":"2"},{"nama":"harianjatim.net","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"forum keadilan","jumlah":1,"tier":"3"},{"nama":"fajar sumbar","jumlah":1,"tier":"3"},{"nama":"ekonomi.espos.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"nusantaratv.com","jumlah":1,"tier":"3"},{"nama":"ayo jakarta.com","jumlah":1,"tier":"3"},{"nama":"kepridays.co.id","jumlah":1,"tier":"3"},{"nama":"disway.id","jumlah":1,"tier":"3"},{"nama":"waspada","jumlah":1,"tier":"3"},{"nama":"ruangkota.com","jumlah":1,"tier":"3"},{"nama":"potretnusantara.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"redaksi.waspada.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"inilahkoran.id","jumlah":1,"tier":"3"},{"nama":"inilahsulsel.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"zona utara","jumlah":1,"tier":"3"},{"nama":"suara ntb","jumlah":1,"tier":"3"},{"nama":"klik warta","jumlah":1,"tier":"3"},{"nama":"hallo riau","jumlah":1,"tier":"3"},{"nama":"mnctrijaya.com","jumlah":1,"tier":"3"},{"nama":"nayantaka.id","jumlah":1,"tier":"3"},{"nama":"mediainvestigasimabes","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"purnama news","jumlah":1,"tier":"3"},{"nama":"go pena.id","jumlah":1,"tier":"3"},{"nama":"info tipikor","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"media aceh","jumlah":1,"tier":"3"},{"nama":"vivanews","jumlah":1,"tier":"1"},{"nama":"kabar kalimantan 1","jumlah":1,"tier":"3"},{"nama":"pikiran rakyat indramayu","jumlah":1,"tier":"2"},{"nama":"warta kota","jumlah":1,"tier":"3"},{"nama":"times indonesia","jumlah":1,"tier":"3"},{"nama":"jatim.times","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"zonajateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"antara","jumlah":1,"tier":"1"},{"nama":"portaljateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"metrojateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"indopolitika.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"pikiran rakyat semarang","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"seputarjateng.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"bogordaily.net","jumlah":1,"tier":"3"},{"nama":"rmol jateng","jumlah":1,"tier":"2"},{"nama":"radar bekasi id","jumlah":1,"tier":"3"},{"nama":"kabar trenggalek","jumlah":1,"tier":"3"},{"nama":"buserjatim.com","jumlah":1,"tier":"3"},{"nama":"insidelombok.id","jumlah":1,"tier":"3"},{"nama":"lahatsatu.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"detik bali","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jatim now","jumlah":1,"tier":"3"},{"nama":"headtopics","jumlah":1,"tier":"3"},{"nama":"kabar sulbar","jumlah":1,"tier":"3"},{"nama":"jpnn jateng","jumlah":1,"tier":"2"},{"nama":"jccnetwork.id","jumlah":1,"tier":"3"},{"nama":"pangannews.id","jumlah":1,"tier":"3"},{"nama":"radarpena.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mitra post","jumlah":1,"tier":"3"},{"nama":"indonesiakini.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radarselaparang.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suarabaru.id","jumlah":1,"tier":"3"},{"nama":"bungasbanten.id","jumlah":1,"tier":"3"},{"nama":"seriau","jumlah":1,"tier":"3"},{"nama":"jatenginsight.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tinta hijau","jumlah":1,"tier":"3"},{"nama":"menit.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"insidepontianak.com","jumlah":1,"tier":"3"},{"nama":"starbpknews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"babelinsight.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"forum nusantara news","jumlah":1,"tier":"3"},{"nama":"publikbicara.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"netizenku","jumlah":1,"tier":"3"},{"nama":"barometerindonesianews.net","jumlah":1,"tier":"3"},{"nama":"jurnalnasional.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ifakta.co","jumlah":1,"tier":"3"},{"nama":"lintascakrawalanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ini riau","jumlah":1,"tier":"3"},{"nama":"malang.disway.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"bakabar","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"timexkupang.fajar.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"inikalteng","jumlah":1,"tier":"3"},{"nama":"origin.kompas.tv","jumlah":1,"tier":"3"},{"nama":"joglo semar news","jumlah":1,"tier":"3"},{"nama":"beritapatroli.co.id","jumlah":1,"tier":"3"},{"nama":"suara pemerintah","jumlah":1,"tier":"3"},{"nama":"lombokpost.jawapos.com","jumlah":1,"tier":"3"},{"nama":"sinar harapan","jumlah":1,"tier":"3"},{"nama":"reformasibangsa.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kelumajang.com","jumlah":1,"tier":"3"},{"nama":"batam post","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"harapan rakyat","jumlah":1,"tier":"3"},{"nama":"medialampung.co.id","jumlah":1,"tier":"3"},{"nama":"fokusindonesia.com","jumlah":1,"tier":"3"},{"nama":"goriau","jumlah":1,"tier":"3"},{"nama":"kabar sebelas","jumlah":1,"tier":"3"},{"nama":"singgalang","jumlah":1,"tier":"3"},{"nama":"saranainformasi.com","jumlah":1,"tier":"3"},{"nama":"lensamata.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"liputan kini","jumlah":1,"tier":"3"},{"nama":"gurindam.id","jumlah":1,"tier":"3"},{"nama":"voi","jumlah":1,"tier":"3"},{"nama":"lensacybernews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"klikmx.com","jumlah":1,"tier":"3"},{"nama":"padusi","jumlah":1,"tier":"3"},{"nama":"nusantara.co","jumlah":1,"tier":"3"},{"nama":"kesatu","jumlah":1,"tier":"3"},{"nama":"tekape","jumlah":1,"tier":"3"},{"nama":"menaramadinah.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tribun news","jumlah":1,"tier":"1"},{"nama":"edisiindonesia.id","jumlah":1,"tier":"3"},{"nama":"peluangnews.id","jumlah":1,"tier":"3"},{"nama":"radar lombok","jumlah":1,"tier":"3"},{"nama":"pena sulbar","jumlah":1,"tier":"3"},{"nama":"wawainews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"seblang.com","jumlah":1,"tier":"3"},{"nama":"elshinta","jumlah":1,"tier":"3"},{"nama":"tirasonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"corenews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"infonusa-news.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"dakta","jumlah":1,"tier":"3"},{"nama":"penjurupos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"barito post","jumlah":1,"tier":"3"},{"nama":"pojok banua","jumlah":1,"tier":"3"},{"nama":"detik finance","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"koran ntb","jumlah":1,"tier":"3"},{"nama":"post kota ntb","jumlah":1,"tier":"3"},{"nama":"bualbual.com","jumlah":1,"tier":"3"},{"nama":"orasi rakyat","jumlah":1,"tier":"3"},{"nama":"strateginews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sumut.pikiran-rakyat.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"fajarnusa.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"fusilatnews.com","jumlah":1,"tier":"3"},{"nama":"sultramedia.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"ekonomi bisnis","jumlah":1,"tier":"1"},{"nama":"palopopos","jumlah":1,"tier":"3"},{"nama":"liputan4.com","jumlah":1,"tier":"3"},{"nama":"infobalinews.id","jumlah":1,"tier":"3"},{"nama":"portal indo news","jumlah":1,"tier":"3"},{"nama":"warta pos","jumlah":1,"tier":"3"},{"nama":"borneoflash.com","jumlah":1,"tier":"3"},{"nama":"pedoman.media","jumlah":1,"tier":"3"},{"nama":"infobanknews","jumlah":1,"tier":"3"},{"nama":"koranindopos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kulturnativ","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"benhillpos.com","jumlah":1,"tier":"3"},{"nama":"news.republika.co.id","jumlah":1,"tier":"3"},{"nama":"86 news","jumlah":1,"tier":"3"},{"nama":"smnnews.co.id","jumlah":1,"tier":"3"},{"nama":"bisnisupdate.com","jumlah":1,"tier":"3"},{"nama":"radaraktual.com","jumlah":1,"tier":"3"},{"nama":"matta news","jumlah":1,"tier":"3"},{"nama":"strategi.id","jumlah":1,"tier":"3"},{"nama":"beritabuana.com","jumlah":1,"tier":"3"},{"nama":"brilian news","jumlah":1,"tier":"3"},{"nama":"joss.co.id","jumlah":1,"tier":"3"},{"nama":"pikiran rakyat","jumlah":1,"tier":"2"},{"nama":"ruangbibir.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lensakalimaya.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"malang post","jumlah":1,"tier":"3"},{"nama":"timenews.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radarferryonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"tribun news malang","jumlah":1,"tier":"2"},{"nama":"aspek.id","jumlah":1,"tier":"3"},{"nama":"ntbsatu.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kick news","jumlah":1,"tier":"3"},{"nama":"sukabumiku.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"simpulindonesia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"idx channel","jumlah":1,"tier":"1"},{"nama":"klikindonesia.co.id","jumlah":1,"tier":"3"},{"nama":"sumedang ekspres","jumlah":1,"tier":"3"},{"nama":"dataindonesia.id","jumlah":1,"tier":"3"},{"nama":"distriknews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"aspirasiku.id","jumlah":1,"tier":"3"},{"nama":"sumsel update","jumlah":1,"tier":"3"},{"nama":"inilahgorontalo.com","jumlah":1,"tier":"3"},{"nama":"cakrawalanusantara.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"javasatu.com","jumlah":1,"tier":"3"},{"nama":"inilahkendari.com","jumlah":1,"tier":"3"},{"nama":"lintas riau news","jumlah":1,"tier":"3"},{"nama":"sindikat post","jumlah":1,"tier":"3"},{"nama":"fajarbali.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suluh kepri","jumlah":1,"tier":"3"},{"nama":"warta ekonomi","jumlah":1,"tier":"1"},{"nama":"indragiri hulu government","jumlah":1,"tier":"3"},{"nama":"voiceindonesia.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"iqplus","jumlah":1,"tier":"3"},{"nama":"kaltenglima.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"koran kontan","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampungnesia.com","jumlah":1,"tier":"3"},{"nama":"fortune indonesia","jumlah":1,"tier":"3"},{"nama":"lentera.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"dprd.jogjakota.go.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"analisa daily","jumlah":1,"tier":"3"},{"nama":"aceh kontras","jumlah":1,"tier":"3"},{"nama":"ivooxid","jumlah":1,"tier":"3"},{"nama":"batamclick","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"selarasonline.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"refubliknews.com","jumlah":1,"tier":"3"},{"nama":"hastara.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"generasi.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"baranews aceh","jumlah":1,"tier":"3"},{"nama":"channel9.id","jumlah":1,"tier":"3"},{"nama":"pamekasan times","jumlah":1,"tier":"3"},{"nama":"jatim times","jumlah":1,"tier":"3"},{"nama":"gresik.jatimtimes","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"banyuwangi.jatimtimes.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"malang times","jumlah":1,"tier":"3"},{"nama":"surabaya times","jumlah":1,"tier":"3"},{"nama":"mojokerto.jatimtimes.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jakartasatu","jumlah":1,"tier":"3"},{"nama":"rakyat merdeka","jumlah":1,"tier":"3"},{"nama":"reporter.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"vnnmedia.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"solo.suaramerdeka","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"patraindonesia.com","jumlah":1,"tier":"3"},{"nama":"harian berkat","jumlah":1,"tier":"3"},{"nama":"medcom.id","jumlah":1,"tier":"1"},{"nama":"retizen.republika.co.id","jumlah":1,"tier":"3"},{"nama":"corebusiness.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kuninganoke.com","jumlah":1,"tier":"3"},{"nama":"lubuklinggau.pikiran-rakyat.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampost.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"musionline.co.id","jumlah":1,"tier":"3"},{"nama":"metropolitan","jumlah":1,"tier":"3"},{"nama":"berita jakarta","jumlah":1,"tier":"3"},{"nama":"mediainformasiindonesia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kaganga","jumlah":1,"tier":"3"},{"nama":"gerbang patriot","jumlah":1,"tier":"3"},{"nama":"radarpekalongan.disway.id","jumlah":1,"tier":"3"},{"nama":"poskota.net","jumlah":1,"tier":"3"},{"nama":"kbanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"matapenna.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"keuangan news","jumlah":1,"tier":"3"},{"nama":"suluhnews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"indonesiasatu.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jurnalis.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"nemangkawipos.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"banten.idntimes.com","jumlah":1,"tier":"3"},{"nama":"palpos.bacakoran.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sonora fm","jumlah":1,"tier":"3"},{"nama":"langit 7","jumlah":1,"tier":"3"},{"nama":"infodenpasar.id","jumlah":1,"tier":"3"},{"nama":"duta metro .com","jumlah":1,"tier":"3"},{"nama":"harianbengkuluekspress.bacakoran.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"idnnews.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"radar nonstop","jumlah":1,"tier":"3"},{"nama":"balige.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"eventguide.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"afederasi.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suarasukabumi.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jatim pos online","jumlah":1,"tier":"3"},{"nama":"suara papua","jumlah":1,"tier":"3"},{"nama":"jatim pos","jumlah":1,"tier":"3"},{"nama":"bali post","jumlah":1,"tier":"3"},{"nama":"swarakonsumenindonesia.com","jumlah":1,"tier":"3"},{"nama":"pratamanews.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"newguineakurir.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sasagupapua.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"jaringnews.co.id","jumlah":1,"tier":"3"},{"nama":"todaynews.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"semarak.co","jumlah":1,"tier":"3"},{"nama":"bithe.co","jumlah":1,"tier":"3"},{"nama":"berikabar.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sinar pos","jumlah":1,"tier":"3"},{"nama":"tabloid kontan","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sultratop.com","jumlah":1,"tier":"3"},{"nama":"harian.disway.id","jumlah":1,"tier":"3"},{"nama":"sultrapedia.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"republik merdeka sumsel","jumlah":1,"tier":"2"},{"nama":"terassultra.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartaminangnews.com","jumlah":1,"tier":"3"},{"nama":"banten raya","jumlah":1,"tier":"3"},{"nama":"suaratani.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"penasultra.id","jumlah":1,"tier":"3"},{"nama":"beritagambar.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kaltim post","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartadigital.id","jumlah":1,"tier":"3"},{"nama":"sigerindo","jumlah":1,"tier":"3"},{"nama":"extranews","jumlah":1,"tier":"3"},{"nama":"pranala.co","jumlah":1,"tier":"3"},{"nama":"tribratanews polda kaltim","jumlah":1,"tier":"3"},{"nama":"realitasonline.id","jumlah":1,"tier":"3"},{"nama":"prestasi reformasi","jumlah":1,"tier":"3"},{"nama":"delitimes.id","jumlah":1,"tier":"3"},{"nama":"hariansumut.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"narasi publik","jumlah":1,"tier":"3"},{"nama":"gosumut.com","jumlah":1,"tier":"3"},{"nama":"newsindonesia.net","jumlah":1,"tier":"3"},{"nama":"bogor update","jumlah":1,"tier":"3"},{"nama":"bsn.go.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"time today","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"lampung one","jumlah":1,"tier":"3"},{"nama":"hargo","jumlah":1,"tier":"3"},{"nama":"kedaipena","jumlah":1,"tier":"3"},{"nama":"lensa medan","jumlah":1,"tier":"3"},{"nama":"ditjenpas","jumlah":1,"tier":"3"},{"nama":"menitnews","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"suara pemred kalbar","jumlah":1,"tier":"3"},{"nama":"sorongraya.co","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"wartajatim.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"kabarreformasi.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sundapost.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"priangantimur","jumlah":1,"tier":"2"},{"nama":"bongkarpost.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"target news","jumlah":1,"tier":"3"},{"nama":"akuntabel.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"sulsel.fajar.co.id","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"filalin.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mediakampung.com","jumlah":1,"tier":"Tidak Diketahui"},{"nama":"mojok","jumlah":1,"tier":"3"}];
+const topOrganization   = [{"rank":1,"organization":"sppg","total_mention":155},{"rank":2,"organization":"satuan pelayanan pemenuhan gizi","total_mention":142},{"rank":3,"organization":"bgn","total_mention":142},{"rank":4,"organization":"badan gizi nasional","total_mention":132},{"rank":5,"organization":"mbg","total_mention":115},{"rank":6,"organization":"kementerian koordinator bidang pangan","total_mention":42},{"rank":7,"organization":"satuan pelayanan pemenuhan gizi sukasirna 02 leles","total_mention":30},{"rank":8,"organization":"pemerintah","total_mention":30},{"rank":9,"organization":"lembaga kantor berita nasional antara","total_mention":29},{"rank":10,"organization":"kementerian pertanian republik indonesia","total_mention":29}];
+const topPersonSocmed   = [{"rank":1,"nama":"prabowo subianto","sebutan":211,"foto":"https://kab-jayawijaya.kpu.go.id/public/kab-jayawijaya/images/1761534271_c7daffd1b94dc3f39769.jpg"},{"rank":2,"nama":"mbg","sebutan":109,"foto":""},{"rank":3,"nama":"pramoedya ananta toer","sebutan":86,"foto":""},{"rank":4,"nama":"joko widodo","sebutan":29,"foto":""},{"rank":5,"nama":"el rumi","sebutan":28,"foto":""},{"rank":6,"nama":"zulkifli hasan","sebutan":26,"foto":""},{"rank":7,"nama":"karina","sebutan":18,"foto":""},{"rank":8,"nama":"ardian andi","sebutan":18,"foto":""},{"rank":9,"nama":"wowo","sebutan":14,"foto":""},{"rank":10,"nama":"dadan hindayana","sebutan":13,"foto":"https://awsimages.detik.net.id/visual/2025/10/21/kepala-badan-gizi-nasional-bgn-dadan-hindayana-reuterswilly-kurniawan-1761038035632_169.jpeg?w=650&q=80"},{"rank":11,"nama":"isnawati","sebutan":13,"foto":""},{"rank":12,"nama":"gibran rakabuming raka","sebutan":12,"foto":""},{"rank":13,"nama":"anies baswedan","sebutan":11,"foto":""},{"rank":14,"nama":"dadan","sebutan":10,"foto":""},{"rank":15,"nama":"abdul rivai","sebutan":9,"foto":""},{"rank":16,"nama":"meutya hafid","sebutan":8,"foto":""},{"rank":17,"nama":"mulyono","sebutan":7,"foto":""},{"rank":18,"nama":"donald trump","sebutan":7,"foto":""},{"rank":19,"nama":"bgn","sebutan":7,"foto":""},{"rank":20,"nama":"alexander fauzi","sebutan":7,"foto":""},{"rank":21,"nama":"susilo bambang yudhoyono","sebutan":7,"foto":""},{"rank":22,"nama":"purbaya","sebutan":6,"foto":""},{"rank":23,"nama":"abdul bais","sebutan":6,"foto":""},{"rank":24,"nama":"heran","sebutan":6,"foto":""},{"rank":25,"nama":"prabowo gibran","sebutan":6,"foto":""},{"rank":26,"nama":"sujimin","sebutan":6,"foto":""},{"rank":27,"nama":"fufufafa","sebutan":6,"foto":""},{"rank":28,"nama":"ganti","sebutan":6,"foto":""},{"rank":29,"nama":"andre tirtabudi","sebutan":6,"foto":""},{"rank":30,"nama":"jir","sebutan":6,"foto":""}];
+const newsTrend         = [{"label":"21 Apr","date":"2026-04-21","total":1000},{"label":"22 Apr","date":"2026-04-22","total":936},{"label":"23 Apr","date":"2026-04-23","total":0},{"label":"24 Apr","date":"2026-04-24","total":676},{"label":"26 Apr","date":"2026-04-26","total":628},{"label":"27 Apr","date":"2026-04-27","total":838}];
+
+// ── Loader progress ─────────────────────────────
+const ldrBar  = document.getElementById('ldrBar');
+const ldrStep = document.getElementById('ldrStep');
+function setProgress(pct, msg) {
+    ldrBar.style.width = pct + '%';
+    ldrStep.textContent = msg;
+}
+setProgress(20, 'Menyiapkan data');
+
+// ── Animated counter ────────────────────────────
+function animateCounter(el, target) {
+    const raw = String(target).replace(/[^0-9.]/g, '');
+    const num = parseFloat(raw);
+    if (isNaN(num) || num < 10) { el.textContent = target; return; }
+    const suffix = String(target).slice(String(Math.round(num)).length);
+    let start = null;
+    const step = (ts) => {
+        if (!start) start = ts;
+        const ease = 1 - Math.pow(1 - Math.min((ts - start) / 1000, 1), 3);
+        el.textContent = Math.floor(ease * num).toLocaleString('id-ID') + suffix;
+        if (ease < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+}
+
+// ── Header counts ───────────────────────────────
+const totalBerita = mediaShare.reduce((a,b) => a + (b.jumlah||0), 0);
+const totalPost   = sentiment.total || 0;
+document.getElementById('hdr-ima').textContent = totalBerita.toLocaleString('id-ID') + ' berita pemberitaan';
+document.getElementById('hdr-isa').textContent = totalPost.toLocaleString('id-ID') + ' percakapan sosial media';
+
+// ── Auto-generate lead paragraph ────────────────
+const leadEl = document.getElementById('lead');
+const pctPos = sentiment.total > 0 ? Math.round(sentiment.positif/sentiment.total*100) : 0;
+const topNews = (summaryNews[0] && summaryNews[0].judul) || '';
+let leadHTML = 'Hari ini terhimpun <strong>' + totalBerita.toLocaleString('id-ID') + ' berita</strong> di media massa nasional dan <strong>' + totalPost.toLocaleString('id-ID') + ' percakapan</strong> sosial media bertema Program Makan Bergizi Gratis.';
+if (sentiment.total > 0) {
+    const tone = pctPos >= 50 ? 'positif (' + pctPos + '%)' : pctPos < 30 ? 'kritis' : 'beragam';
+    leadHTML += ' Sentimen publik didominasi nada <strong>' + tone + '</strong>.';
+}
+if (topNews) leadHTML += ' Topik dominan: <em>' + topNews + '</em>.';
+leadEl.innerHTML = leadHTML;
+
+setProgress(35, 'Menyusun Angka Kunci');
+
+// ── SCORECARD ───────────────────────────────────
+const scoreEl = document.getElementById('scorecard');
+const count = scorecard.length;
+scoreEl.classList.add('cols-' + Math.min(count, 4));
+const scorecard_html = scorecard.map((s, i) => {
+    const isHero = (i === 0 && count >= 4);
+    const cls    = isHero ? 'kpi kpi-hero fade-in delay-1' : 'kpi fade-in delay-' + Math.min(i+1, 4);
+    const konteksHtml = s.link
+        ? '<a href="' + s.link + '" target="_blank" rel="noopener">' + (s.konteks || 'Lihat detail') + '</a>'
+        : (s.konteks || '');
+    return '<div class="' + cls + '">' +
+        '<div class="kpi-label">' + (s.label || '') + '</div>' +
+        '<div class="kpi-value" data-target="' + s.nilai + '">' + s.nilai + '</div>' +
+        (s.satuan ? '<div class="kpi-unit">' + s.satuan + '</div>' : '') +
+        (konteksHtml ? '<div class="kpi-context">' + konteksHtml + '</div>' : '') +
+    '</div>';
+}).join('');
+scoreEl.innerHTML = scorecard_html;
+document.querySelectorAll('.kpi-value[data-target]').forEach(el => animateCounter(el, el.dataset.target));
+
+setProgress(50, 'Memuat ringkasan berita');
+
+// ── SUMMARY NEWS ────────────────────────────────
+const sn = document.getElementById('summary-news');
+if (!summaryNews.length) {
+    sn.innerHTML = '<div class="empty-state">Tidak ada data ringkasan berita.</div>';
+} else {
+    summaryNews.forEach((item, i) => {
+        sn.innerHTML += '<div class="insight">' +
+            '<div class="insight-num">' + String(i+1).padStart(2,'0') + '</div>' +
+            '<div><div class="insight-title">' + item.judul + '</div><div class="insight-body">' + item.detail + '</div></div>' +
+        '</div>';
+    });
+}
+
+// ── TOKOH ───────────────────────────────────────
+const tw = document.getElementById('tokoh');
+const influencerTop = influencer.slice(0, 6);
+if (!influencerTop.length) {
+    tw.innerHTML = '<div class="empty-state" style="grid-column:1/-1">Tidak ada data tokoh publik.</div>';
+} else {
+    influencerTop.forEach(t => {
+        const name = t.influencer || '';
+        const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+        const ini = name.split(' ').slice(0,2).map(w => (w[0]||'').toUpperCase()).join('');
+        const avatarHtml = t.foto
+            ? '<div class="tokoh-av"><img src="' + t.foto + '" alt="' + displayName + '" onerror="this.parentElement.textContent=\'' + ini + '\'"></div>'
+            : '<div class="tokoh-av">' + ini + '</div>';
+        tw.innerHTML += '<div class="tokoh">' +
+            avatarHtml +
+            '<div>' +
+                '<div class="tokoh-name">' + displayName + '</div>' +
+                '<div class="tokoh-jab">' + (t.jabatan || '—') + '</div>' +
+                '<div class="tokoh-mention">' + (t.total_mention || 0) + ' kali dikutip</div>' +
+                '<div class="tokoh-quote">"' + (t.opinion || t.best_statement || '') + '"</div>' +
+            '</div>' +
+        '</div>';
+    });
+}
+
+// ── SOSMED SOROTAN ──────────────────────────────
+const sg = document.getElementById('socmed-grid');
+[
+    { key:'positif', label:'Sentimen Positif', cls:'pos' },
+    { key:'negatif', label:'Sentimen Negatif', cls:'neg' }
+].forEach(sec => {
+    const items = summarySocmed[sec.key] || [];
+    let html = '<div><div class="soc-block-title ' + sec.cls + '"><span>' + sec.label + '</span><span class="count">' + items.length + ' postingan</span></div>';
+    if (!items.length) {
+        html += '<div class="empty-state">Tidak ada data.</div>';
+    } else {
+        items.forEach(item => {
+            const plat = (item.platform||[]).map(p => '<span class="platbadge">' + p + '</span>').join('');
+            const ebc = ['joy','trust','anticipation'].includes(item.emosi) ? 'green'
+                      : ['anger','disgust'].includes(item.emosi) ? 'red' : 'amber';
+            html += '<div class="soc-item">' +
+                '<div class="soc-item-title"><span style="flex:1">' + item.judul + '</span><span class="soc-emosi ' + ebc + '">' + item.emosi + '</span></div>' +
+                '<div class="soc-detail">' + item.detail + '</div>' +
+                '<div>' + plat + '</div>' +
+            '</div>';
+        });
+    }
+    sg.innerHTML += html + '</div>';
+});
+
+setProgress(65, 'Memuat rekomendasi');
+
+// ── REKOMENDASI ─────────────────────────────────
+const rw = document.getElementById('rek');
+if (!rekomendasi.length) {
+    rw.innerHTML = '<div class="empty-state">Tidak ada data rekomendasi kebijakan.</div>';
+} else {
+    rekomendasi.forEach((r, i) => {
+        const prio = (r.prioritas || 'rendah').toLowerCase();
+        rw.innerHTML += '<div class="rek">' +
+            '<div class="rek-num">' + String(i+1).padStart(2,'0') + '</div>' +
+            '<div>' +
+                '<div class="rek-title">' + r.judul + '</div>' +
+                (r.latar ? '<div class="rek-latar">' + r.latar + '</div>' : '') +
+                '<div class="rek-body">' + r.rekomendasi + '</div>' +
+                (r.sasaran ? '<div class="rek-sasaran"><span>Sasaran:</span>' + r.sasaran + '</div>' : '') +
+            '</div>' +
+            '<div class="rek-prio ' + prio + '">' + prio + '</div>' +
+        '</div>';
+    });
+}
+
+// ── WORDCLOUD ───────────────────────────────────
+const wc = document.getElementById('wordcloud');
+if (!wordcloud.length) {
+    wc.innerHTML = '<div class="empty-state">Tidak ada data kata kunci.</div>';
+} else {
+    const maxWC = Math.max(...wordcloud.map(w => w.count || w.value || 0));
+    wordcloud.forEach(w => {
+        const val = w.count || w.value || 0;
+        const txt = w.word  || w.text  || '';
+        const sz  = 13 + Math.round((val/maxWC) * 22);
+        const weight = sz > 26 ? 700 : sz > 20 ? 600 : 400;
+        wc.innerHTML += '<span style="font-size:' + sz + 'px;font-weight:' + weight + '" title="' + val + 'x">' + txt + '</span>';
+    });
+}
+
+// ── Sticky masthead behavior ────────────────────
+const masthead = document.getElementById('masthead');
+window.addEventListener('scroll', () => {
+    masthead.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ── IntersectionObserver fade-in ────────────────
+const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            fadeObs.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+// ── Chart.js editorial defaults ─────────────────
+setProgress(78, 'Merender visualisasi');
+Chart.defaults.color = '#4a4a4a';
+Chart.defaults.font.family = 'Inter, sans-serif';
+Chart.defaults.plugins.tooltip.backgroundColor = '#1a1a1a';
+Chart.defaults.plugins.tooltip.titleFont  = { family:'Source Serif 4', size:13, weight:'600' };
+Chart.defaults.plugins.tooltip.bodyFont   = { family:'Inter', size:12 };
+Chart.defaults.plugins.tooltip.padding    = 12;
+Chart.defaults.plugins.tooltip.cornerRadius = 0;
+Chart.defaults.plugins.tooltip.borderColor = '#1a1a1a';
+Chart.defaults.plugins.tooltip.borderWidth = 0;
+Chart.defaults.plugins.tooltip.displayColors = false;
+
+// ── Tier doughnut ──────────────────────────────
+const media_per_tier = {};
+media_with_tier.forEach(m => {
+    const key = 'Tier ' + m.tier;
+    (media_per_tier[key] = media_per_tier[key] || []).push(m);
+});
+Object.keys(media_per_tier).forEach(k => media_per_tier[k].sort((a,b) => b.jumlah - a.jumlah));
+
+const TIER_COLORS = { 'Tier 1':'#0a2540', 'Tier 2':'#2c5aa0', 'Tier 3':'#7f9fc4', 'Tier Tidak Diketahui':'#c4cdd5' };
+const tierLabels = tier_distribution.map(t => t.tier);
+const tierVals   = tier_distribution.map(t => t.jumlah);
+const tierColors = tierLabels.map(t => TIER_COLORS[t] || '#c4cdd5');
+const tierTotal  = tierVals.reduce((a,b) => a+b, 0);
+const tierTooltipEl = document.getElementById('tierTooltip');
+
+const tierLegendEl = document.getElementById('tierLegend');
+tierLabels.forEach((lbl, i) => {
+    const pct = tierTotal ? (tierVals[i]/tierTotal*100).toFixed(1) : '0.0';
+    tierLegendEl.innerHTML += '<div class="data-row">' +
+        '<div class="data-bullet" style="background:' + tierColors[i] + '"></div>' +
+        '<div class="data-name">' + lbl + '</div>' +
+        '<div class="data-pct">' + pct + '%</div>' +
+        '<div class="data-val">' + tierVals[i].toLocaleString('id-ID') + '</div>' +
+    '</div>';
+});
+
+function tierExternalTooltip(context) {
+    const { chart, tooltip } = context;
+    if (tooltip.opacity === 0) { tierTooltipEl.classList.remove('active'); return; }
+    const idx       = tooltip.dataPoints[0].dataIndex;
+    const label     = tierLabels[idx];
+    const val       = tierVals[idx];
+    const pct       = (val/tierTotal*100).toFixed(1);
+    const tierColor = tierColors[idx];
+    const medias    = media_per_tier[label] || [];
+    const maxM      = medias.length ? medias[0].jumlah : 1;
+
+    let html = '<div class="tier-tooltip-title"><span class="tier-tooltip-dot" style="background:' + tierColor + '"></span>' + label + '</div>' +
+        '<div class="tier-tooltip-sub">' + val.toLocaleString('id-ID') + ' berita · ' + pct + '% dari total</div>';
+    medias.slice(0, 8).forEach((m, i) => {
+        html += '<div class="tier-tooltip-row">' +
+            '<span class="tier-tooltip-rank">' + (i+1) + '</span>' +
+            '<span class="tier-tooltip-name">' + m.nama + '</span>' +
+            '<div class="tier-tooltip-bar-bg"><div class="tier-tooltip-bar-fill" style="width:' + Math.round(m.jumlah/maxM*100) + '%;background:' + tierColor + '"></div></div>' +
+            '<span class="tier-tooltip-val">' + m.jumlah + '</span>' +
+        '</div>';
+    });
+    if (medias.length > 8) html += '<div class="tier-tooltip-more">+ ' + (medias.length-8) + ' media lainnya</div>';
+    tierTooltipEl.innerHTML = html;
+    tierTooltipEl.classList.add('active');
+
+    const r  = chart.canvas.getBoundingClientRect();
+    const sy = window.scrollY, sx = window.scrollX;
+    let left = r.left + sx + tooltip.caretX + 16;
+    let top  = r.top  + sy + tooltip.caretY - 20;
+    const ttw = tierTooltipEl.offsetWidth || 280, tth = tierTooltipEl.offsetHeight || 200;
+    if (left + ttw > window.innerWidth + sx - 20)  left = r.left + sx + tooltip.caretX - ttw - 16;
+    if (top  + tth > window.innerHeight + sy - 20) top  = r.top  + sy + tooltip.caretY - tth - 10;
+    tierTooltipEl.style.left = left + 'px';
+    tierTooltipEl.style.top  = top  + 'px';
+}
+
+new Chart(document.getElementById('cTier'), {
+    type:'doughnut',
+    data:{ labels:tierLabels, datasets:[{ data:tierVals, backgroundColor:tierColors, borderColor:'#faf8f3', borderWidth:2, spacing:1 }] },
+    options:{
+        responsive:true, maintainAspectRatio:false, cutout:'62%',
+        plugins:{ legend:{display:false}, datalabels:{display:false}, tooltip:{enabled:false, external:tierExternalTooltip} }
+    },
+    plugins:[ChartDataLabels]
+});
+
+// ── News Trend Line ────────────────────────────
+new Chart(document.getElementById('cNewsTrend'), {
+    type:'line',
+    data:{
+        labels: newsTrend.map(d => d.label),
+        datasets:[{
+            data: newsTrend.map(d => d.total),
+            borderColor:'#0a2540', backgroundColor:'rgba(10,37,64,0.04)',
+            borderWidth:1.5, fill:true, tension:0.25,
+            pointBackgroundColor: newsTrend.map((_,i) => i===newsTrend.length-1 ? '#0a2540' : '#fff'),
+            pointBorderColor:'#0a2540', pointBorderWidth:1.5,
+            pointRadius: newsTrend.map((_,i) => i===newsTrend.length-1 ? 5 : 3),
+            pointHoverRadius:6
+        }]
+    },
+    options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{
+            legend:{display:false},
+            datalabels:{ anchor:'end', align:'top', color:'#1a1a1a', font:{family:'Inter', size:11, weight:'600'}, formatter:v => v.toLocaleString('id-ID') },
+            tooltip:{ callbacks:{ title:items => items[0].label, label:item => item.raw.toLocaleString('id-ID') + ' berita' }}
+        },
+        scales:{
+            x:{ grid:{display:false}, border:{color:'#d4d4d4'}, ticks:{font:{size:11}, color:'#8a8a8a'} },
+            y:{ beginAtZero:true, grid:{color:'#ebe9e3', drawTicks:false}, border:{display:false}, ticks:{font:{size:10}, color:'#8a8a8a'} }
+        }
+    },
+    plugins:[ChartDataLabels]
+});
+
+// ── Top Organization Bar ───────────────────────
+const orgTop10 = topOrganization.slice(0,10);
+new Chart(document.getElementById('cOrg'), {
+    type:'bar',
+    data:{
+        labels: orgTop10.map(o => (o.organization||'').split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ')),
+        datasets:[{ data:orgTop10.map(o => o.total_mention), backgroundColor:'#0a2540', borderRadius:0, borderWidth:0, barThickness:14 }]
+    },
+    options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{
+            legend:{display:false},
+            datalabels:{ anchor:'end', align:'end', color:'#1a1a1a', font:{family:'Inter', size:11, weight:'600'}, formatter:v => v.toLocaleString('id-ID') },
+            tooltip:{ callbacks:{ title:items => items[0].label, label:item => 'Disebut ' + item.raw.toLocaleString('id-ID') + ' kali' }}
+        },
+        scales:{
+            x:{ beginAtZero:true, grid:{color:'#ebe9e3', drawTicks:false}, border:{display:false}, ticks:{font:{size:10}, color:'#8a8a8a'} },
+            y:{ grid:{display:false}, border:{color:'#d4d4d4'}, ticks:{font:{family:'Inter', size:11.5, weight:'500'}, color:'#1a1a1a', padding:6} }
+        }
+    },
+    plugins:[ChartDataLabels]
+});
+
+// ── Sentiment Doughnut + center text ───────────
+const sVals   = [sentiment.positif, sentiment.negatif, sentiment.netral];
+const sLabels = ['Positif','Negatif','Netral'];
+const sColors = ['#2d6a4f','#a31621','#d29922'];
+
+const sentLegendEl = document.getElementById('sentLegend');
+sLabels.forEach((l, i) => {
+    const pct = sentiment.total ? Math.round(sVals[i]/sentiment.total*100) : 0;
+    sentLegendEl.innerHTML += '<div class="data-row">' +
+        '<div class="data-bullet" style="background:' + sColors[i] + '"></div>' +
+        '<div class="data-name">' + l + '</div>' +
+        '<div class="data-pct">' + pct + '%</div>' +
+        '<div class="data-val">' + sVals[i].toLocaleString('id-ID') + '</div>' +
+    '</div>';
+});
+
+const centerTextPlugin = {
+    id:'centerText',
+    beforeDraw(chart) {
+        if (chart.config.type !== 'doughnut') return;
+        const { ctx, chartArea } = chart;
+        if (!chartArea) return;
+        const cx = (chartArea.left + chartArea.right) / 2;
+        const cy = (chartArea.top  + chartArea.bottom) / 2;
+        const total = chart.data.datasets[0].data.reduce((a,b) => a+b, 0);
+        ctx.save();
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.font = '600 22px "Source Serif 4", Georgia, serif';
+        ctx.fillStyle = '#1a1a1a';
+        ctx.fillText(total.toLocaleString('id-ID'), cx, cy - 8);
+        ctx.font = '10px Inter, sans-serif';
+        ctx.fillStyle = '#8a8a8a';
+        ctx.fillText('TOTAL POST', cx, cy + 11);
+        ctx.restore();
+    }
+};
+
+new Chart(document.getElementById('cSent'), {
+    type:'doughnut',
+    data:{ labels:sLabels, datasets:[{ data:sVals, backgroundColor:sColors, borderColor:'#faf8f3', borderWidth:2 }] },
+    options:{
+        responsive:true, maintainAspectRatio:false, cutout:'60%',
+        plugins:{
+            legend:{display:false},
+            datalabels:{display:false},
+            tooltip:{ callbacks:{ title:items => items[0].label, label:item => {
+                const total = item.dataset.data.reduce((a,b) => a+b, 0);
+                return item.raw.toLocaleString('id-ID') + ' post · ' + (item.raw/total*100).toFixed(1) + '%';
+            }}}
+        }
+    },
+    plugins:[ChartDataLabels, centerTextPlugin]
+});
+
+// ── Top Person Socmed ──────────────────────────
+const tps = document.getElementById('top-person-socmed');
+if (!topPersonSocmed.length) {
+    tps.innerHTML = '<div class="empty-state">Tidak ada data tokoh sosial media.</div>';
+} else {
+    const maxSeb = Math.max(...topPersonSocmed.map(p => p.sebutan));
+    topPersonSocmed.slice(0, 10).forEach((p, i) => {
+        const name = p.nama || '';
+        const displayName = name.split(' ').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+        const ini = name.split(' ').slice(0,2).map(w => w[0] ? w[0].toUpperCase() : '').join('');
+        const pct = Math.round(p.sebutan / maxSeb * 100);
+        const avatarHtml = p.foto
+            ? '<div class="tps-av"><img src="' + p.foto + '" alt="' + displayName + '" onerror="this.parentElement.textContent=\'' + ini + '\'"></div>'
+            : '<div class="tps-av">' + ini + '</div>';
+        tps.innerHTML += '<div class="tps-item">' +
+            '<div class="tps-rank">' + String(i+1).padStart(2,'0') + '</div>' +
+            avatarHtml +
+            '<div class="tps-name">' + displayName + '</div>' +
+            '<div class="tps-bar-wrap">' +
+                '<div class="tps-bar-bg"><div class="tps-bar-fill" style="width:' + pct + '%"></div></div>' +
+                '<div class="tps-val">' + p.sebutan.toLocaleString('id-ID') + ' kali disebut</div>' +
+            '</div>' +
+        '</div>';
+    });
+}
+
+// ── Platform Doughnut ──────────────────────────
+const pTotal = platSocmed.reduce((a,b) => a+b.jumlah, 0);
+const platColors = ['#0a2540','#2c5aa0','#7f9fc4','#c87f00','#d29922','#a31621','#2d6a4f'];
+
+const platLegendEl = document.getElementById('platLegend');
+platSocmed.forEach((p, i) => {
+    const pct = pTotal ? Math.round(p.jumlah/pTotal*100) : 0;
+    platLegendEl.innerHTML += '<div class="data-row">' +
+        '<div class="data-bullet" style="background:' + platColors[i % platColors.length] + '"></div>' +
+        '<div class="data-name">' + p.nama + '</div>' +
+        '<div class="data-pct">' + pct + '%</div>' +
+        '<div class="data-val">' + p.jumlah.toLocaleString('id-ID') + '</div>' +
+    '</div>';
+});
+
+new Chart(document.getElementById('cPlat'), {
+    type:'doughnut',
+    data:{ labels:platSocmed.map(p => p.nama), datasets:[{ data:platSocmed.map(p => p.jumlah), backgroundColor:platColors, borderColor:'#faf8f3', borderWidth:2 }] },
+    options:{
+        responsive:true, maintainAspectRatio:false, cutout:'55%',
+        plugins:{
+            legend:{display:false},
+            datalabels:{display:false},
+            tooltip:{ callbacks:{ title:items => items[0].label, label:item => {
+                const total = item.dataset.data.reduce((a,b) => a+b, 0);
+                return item.raw.toLocaleString('id-ID') + ' post · ' + (item.raw/total*100).toFixed(1) + '%';
+            }}}
+        }
+    }
+});
+
+// ── Emotion Horizontal Bar ─────────────────────
+const emoKeys  = Object.keys(emotion);
+const emoVals  = Object.values(emotion);
+const emoTotal = emoVals.reduce((a,b) => a+b, 0);
+new Chart(document.getElementById('cEmo'), {
+    type:'bar',
+    data:{ labels:emoKeys, datasets:[{ data:emoVals, backgroundColor:'#0a2540', borderRadius:0, borderWidth:0, barThickness:14 }] },
+    options:{
+        indexAxis:'y', responsive:true, maintainAspectRatio:false,
+        plugins:{
+            legend:{display:false},
+            datalabels:{ anchor:'end', align:'end', color:'#1a1a1a', font:{family:'Inter', size:10.5, weight:'600'}, formatter:v => v.toLocaleString('id-ID') },
+            tooltip:{ callbacks:{ title:items => 'Emosi: ' + items[0].label, label:item => item.raw.toLocaleString('id-ID') + ' post · ' + (item.raw/emoTotal*100).toFixed(1) + '%' }}
+        },
+        scales:{
+            x:{ beginAtZero:true, grid:{color:'#ebe9e3', drawTicks:false}, border:{display:false}, ticks:{font:{size:10}, color:'#8a8a8a'} },
+            y:{ grid:{display:false}, border:{color:'#d4d4d4'}, ticks:{font:{family:'Inter', size:11.5, weight:'500'}, color:'#1a1a1a'} }
+        }
+    },
+    plugins:[ChartDataLabels]
+});
+
+// ── Dismiss loader ─────────────────────────────
+setProgress(94, 'Hampir selesai');
+requestAnimationFrame(() => requestAnimationFrame(() => {
+    setProgress(100, 'Selesai');
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('done');
+        document.querySelectorAll('.fade-in').forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) el.classList.add('visible');
+        });
+    }, 300);
+}));
+</script>
+</body>
+</html>
